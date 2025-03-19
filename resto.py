@@ -37,7 +37,4 @@ menu.set("Select A Restaurant")
 drop = ttk.Combobox(root, textvariable=menu, values=["Resto1","Resto2"], font=('Georgia', 18), justify="center", state = "readonly")
 drop.place(x=600, y=200, width=300, height=40)
 
-test = tk.Entry(root,text="Enter Table Number",width=35, font=('Arial', 16), bg="grey", fg="black")
-test.place(x=600, y=300)
-
 root.mainloop()
