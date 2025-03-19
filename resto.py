@@ -30,7 +30,6 @@ search_bar.insert(0, "Search for a dish")
 search_bar.bind("<FocusIn>", clear_placeholder)
 search_bar.place(x=350, y=100)
 
-# Dropdown menu (Centered on screen + Centered Text)
 menu = StringVar()
 menu.set("Select A Restaurant")
 
