@@ -10,8 +10,8 @@ def clear_placeholder(event):
         event.widget.delete(0, tk.END)
         
 def open_resto():
-    root.destroy()
-    import resto
+    root.destroy()  #Closes current window
+    import resto    #opens resto.py window
 
 bg_image = Image.open("images/restobg2.png")
 bg_photo = ImageTk.PhotoImage(bg_image)

@@ -34,7 +34,14 @@ search_bar.place(x=350, y=100)
 menu = StringVar()
 menu.set("Select A Restaurant")
 
-drop = ttk.Combobox(root, textvariable=menu, values=["Resto1","Resto2"], font=('Georgia', 18), justify="center", state = "readonly")
-drop.place(x=600, y=200, width=300, height=40)
+drop = ttk.Combobox(root, textvariable=menu, values=["MC'Donalds","Burger-King"], font=('Georgia', 18), justify="center", state = "readonly")
+drop.place(x=600, y=175, width=300, height=40)
 
+mcd = Image.open("images/mcd.png").resize((500, 500))
+mcd_photo = ImageTk.PhotoImage(mcd)
+canvas.create_image(200, 250, image=mcd_photo, anchor="nw")
+
+burger_king = Image.open("images/burger-king.jpg").resize((500, 500))
+burger_king_photo = ImageTk.PhotoImage(burger_king)
+canvas.create_image(800, 250, image=burger_king_photo, anchor="nw")
 root.mainloop()
