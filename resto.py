@@ -44,3 +44,6 @@ burger_king = Image.open("images/burger-king.jpg").resize((500, 500))
 burger_king_photo = ImageTk.PhotoImage(burger_king)
 canvas.create_image(800, 250, image=burger_king_photo, anchor="nw")
 root.mainloop()
+
+
+#Note :- Search bar ka kuch karo ya fir nikalo isse
