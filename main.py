@@ -22,10 +22,7 @@ square_image = square_image.resize((150, 150))
 square_photo = ImageTk.PhotoImage(square_image)
 
 square_label = tk.Label(root, image=square_photo, compound="center",font=("Arial", 16, "bold"), fg="white", bg="black", padx=10,pady=10)
-square_label.place(relx=0.5, rely=0.5, anchor="center")  
-
-test = tk.Label(root, text="Feasto", font=("Arial", 40, "bold"), fg="white", bg="black")
-test.place(relx=0.5, rely=0.6, anchor="center")
+square_label.place(relx=0.5, rely=0.5, anchor="center")
 
 root.after(3000, open_home)  # Wait for 3 seconds before opening home.py
 
