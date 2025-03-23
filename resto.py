@@ -83,10 +83,7 @@ for index, (name, data) in enumerate(restaurants.items()):
         x_pos = x_start
         y_pos += image_size + gap + 50
         
-    # I have manged to flabbergast Mr. Upadhyay yet again 
+
         
 
 root.mainloop()
-
-git config --global user.name "S-Nitya"
-git config --global user.email "nityabsingh18@gmail.com"
