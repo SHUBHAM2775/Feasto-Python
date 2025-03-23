@@ -38,28 +38,28 @@ menu_items = [
         "restaurant_name": "McDonald's",
         "dish_name": "Big Mac",
         "price": 6,
-        "description": "Two beef patties, special sauce, lettuce, cheese"
+        "description": "Two chicken patties along with our special sauce, lettuce & cheese"
     },
     {
         "order_id": 5,
         "restaurant_name": "McDonald's",
         "dish_name": "McVeggie",
         "price": 3,
-        "description": "Vegetable patty, lettuce, mayo"
+        "description": "Delicious Vegetable patty layered with lettuce & mayo"
     },
     {
         "order_id": 6,
         "restaurant_name": "McDonald's",
         "dish_name": "Filet-O-Fish",
         "price": 4,
-        "description": "Fish fillet, tartar sauce, cheese"
+        "description": "Fish fillets with tartar sauce & cheese"
     },
     {
         "order_id": 7,
         "restaurant_name": "McDonald's",
         "dish_name": "McFlurry Oreo",
         "price": 3,
-        "description": "Vanilla ice cream with Oreo crumbles"
+        "description": "Classic Vanilla ice cream with Oreo crumbles"
     },
     {
         "order_id": 8,
@@ -86,30 +86,30 @@ menu_items = [
     {
         "order_id": 11,
         "restaurant_name": "Domino's",
-        "dish_name": "Cheese Pizza",
+        "dish_name": "Classic Margarita",
         "price": 19,
-        "description": "Cheese, tomato, corn"
+        "description": "None required for this one right ?"
     },
     {
         "order_id": 12,
         "restaurant_name": "Domino's",
         "dish_name": "Paneer Pizza",
         "price": 5,
-        "description": "Paneer, cheese, mushroom"
+        "description": "Spicy paneer, bell peppers and mushroom topped along with loads of cheese"
     },
     {
         "order_id": 13,
         "restaurant_name": "Domino's",
         "dish_name": "Veggie Supreme",
         "price": 7,
-        "description": "Capsicum, onion, olives, cheese"
+        "description": "Capsicum, onion, olives & cheese"
     },
     {
         "order_id": 14,
         "restaurant_name": "Domino's",
         "dish_name": "Pepperoni Pizza",
         "price": 10,
-        "description": "Pepperoni, mozzarella, tomato sauce"
+        "description": "Pepperoni, mozzarella & tomato sauce"
     },
     {
         "order_id": 15,
@@ -124,21 +124,21 @@ menu_items = [
         "restaurant_name": "Burger King",
         "dish_name": "Whopper",
         "price": 8,
-        "description": "Beef patty, cheese, lettuce, tomato"
+        "description": "Vegetable patty, cheese, lettuce & tomato"
     },
     {
         "order_id": 22,
         "restaurant_name": "Burger King",
         "dish_name": "Crispy Veg Burger",
         "price": 3,
-        "description": "Crispy veg patty, lettuce, mayo"
+        "description": "Crispy veg patty, lettuce &  mayo"
     },
     {
         "order_id": 23,
         "restaurant_name": "Burger King",
-        "dish_name": "Chicken Fries",
+        "dish_name": "Veggie Strips",
         "price": 4,
-        "description": "Crispy chicken sticks, spices"
+        "description": "Cheesy & crispy vegetable strips"
     },
 
     {
