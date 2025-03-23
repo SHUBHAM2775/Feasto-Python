@@ -1,130 +1,159 @@
-[{
-  "_id": {
-    "$oid": "67dfb9e7e047c417bdd5323d"
-  },
-  "order_id": 1,
-  "restaurant_name": "McDonald's",
-  "dish_name": "McAloo Tikki",
-  "price": 2,
-  "description": "Potato patty, lettuce, mayo"
+[
+  {
+    "order_id": 1,
+    "restaurant_name": "McDonald's",
+    "dish_name": "McAloo Tikki",
+    "price": 2,
+    "description": "Crispy Potato patty with lettuce, mayo & lots of cheese"
 },
 {
-  "_id": {
-    "$oid": "67dfb9e7e047c417bdd5323e"
-  },
-  "order_id": 2,
-  "restaurant_name": "McDonald's",
-  "dish_name": "McSpicy Paneer",
-  "price": 5,
-  "description": "Paneer, lettuce, spicy sauce"
+    "order_id": 2,
+    "restaurant_name": "McDonald's",
+    "dish_name": "McSpicy Paneer",
+    "price": 5,
+    "description": "Flavourful Paneer layered with lettuce & spicy sauce"
 },
 {
-  "_id": {
-    "$oid": "67dfb9e7e047c417bdd5323f"
-  },
-  "order_id": 3,
-  "restaurant_name": "McDonald's",
-  "dish_name": "McChicken",
-  "price": 4,
-  "description": "Chicken patty, mayo, lettuce"
+    "order_id": 3,
+    "restaurant_name": "McDonald's",
+    "dish_name": "McChicken",
+    "price": 4,
+    "description": "Crispy Chicken patty loaded with mayo &  lettuce"
 },
 {
-  "_id": {
-    "$oid": "67dfb9e7e047c417bdd53240"
-  },
-  "order_id": 4,
-  "restaurant_name": "Domino's",
-  "dish_name": "Cheese Pizza",
-  "price": 19,
-  "description": "Cheese, tomato, corn"
+    "order_id": 4,
+    "restaurant_name": "McDonald's",
+    "dish_name": "Big Mac",
+    "price": 6,
+    "description": "Two chicken patties along with our special sauce, lettuce & cheese"
 },
 {
-  "_id": {
-    "$oid": "67dfb9e7e047c417bdd53241"
-  },
-  "order_id": 5,
-  "restaurant_name": "Domino's",
-  "dish_name": "Paneer Pizza",
-  "price": 5,
-  "description": "Paneer, cheese, mushroom"
+    "order_id": 5,
+    "restaurant_name": "McDonald's",
+    "dish_name": "McVeggie",
+    "price": 3,
+    "description": "Delicious Vegetable patty layered with lettuce & mayo"
 },
 {
-  "_id": {
-    "$oid": "67dfb9e7e047c417bdd53242"
-  },
-  "order_id": 6,
-  "restaurant_name": "Domino's",
-  "dish_name": "Veggie Supreme",
-  "price": 7,
-  "description": "Capsicum, onion, olives, cheese"
+    "order_id": 6,
+    "restaurant_name": "McDonald's",
+    "dish_name": "Filet-O-Fish",
+    "price": 4,
+    "description": "Fish fillets with tartar sauce & cheese"
 },
 {
-  "_id": {
-    "$oid": "67dfb9e7e047c417bdd53243"
-  },
-  "order_id": 7,
-  "restaurant_name": "Burger King",
-  "dish_name": "Whopper",
-  "price": 8,
-  "description": "Beef patty, cheese, lettuce, tomato"
+    "order_id": 7,
+    "restaurant_name": "McDonald's",
+    "dish_name": "McFlurry Oreo",
+    "price": 3,
+    "description": "Classic Vanilla ice cream with Oreo crumbles"
 },
 {
-  "_id": {
-    "$oid": "67dfb9e7e047c417bdd53244"
-  },
-  "order_id": 8,
-  "restaurant_name": "Burger King",
-  "dish_name": "Crispy Veg Burger",
-  "price": 3,
-  "description": "Crispy veg patty, lettuce, mayo"
+    "order_id": 8,
+    "restaurant_name": "McDonald's",
+    "dish_name": "French Fries",
+    "price": 2,
+    "description": "Crispy golden fries"
 },
 {
-  "_id": {
-    "$oid": "67dfb9e7e047c417bdd53245"
-  },
-  "order_id": 9,
-  "restaurant_name": "Burger King",
-  "dish_name": "Chicken Fries",
-  "price": 4,
-  "description": "Crispy chicken sticks, spices"
+    "order_id": 9,
+    "restaurant_name": "McDonald's",
+    "dish_name": "McCafé Latte",
+    "price": 3,
+    "description": "Smooth espresso with steamed milk"
 },
 {
-  "_id": {
-    "$oid": "67dfc2924bda0924a1691411"
-  },
-  "order_id": 10,
-  "restaurant_name": "Starbucks",
-  "dish_name": "Caramel Macchiato",
-  "price": 4.99,
-  "description": "Espresso with steamed milk, vanilla syrup, and caramel drizzle"
+    "order_id": 10,
+    "restaurant_name": "McDonald's",
+    "dish_name": "Chocolate Shake",
+    "price": 4,
+    "description": "Rich chocolate milkshake"
+},
+
+{
+    "order_id": 11,
+    "restaurant_name": "Domino's",
+    "dish_name": "Classic Margarita",
+    "price": 19,
+    "description": "None required for this one right ?"
 },
 {
-  "_id": {
-    "$oid": "67dfc2924bda0924a1691412"
-  },
-  "order_id": 11,
-  "restaurant_name": "Starbucks",
-  "dish_name": "Caffè Latte",
-  "price": 3.99,
-  "description": "Smooth espresso blended with steamed milk"
+    "order_id": 12,
+    "restaurant_name": "Domino's",
+    "dish_name": "Paneer Pizza",
+    "price": 5,
+    "description": "Spicy paneer, bell peppers and mushroom topped along with loads of cheese"
 },
 {
-  "_id": {
-    "$oid": "67dfc2924bda0924a1691413"
-  },
-  "order_id": 12,
-  "restaurant_name": "Starbucks",
-  "dish_name": "Mocha Frappuccino",
-  "price": 5.49,
-  "description": "Coffee, milk, and ice blended with rich mocha sauce"
+    "order_id": 13,
+    "restaurant_name": "Domino's",
+    "dish_name": "Veggie Supreme",
+    "price": 7,
+    "description": "Capsicum, onion, olives & cheese"
 },
 {
-  "_id": {
-    "$oid": "67dfc2924bda0924a1691414"
-  },
-  "order_id": 13,
-  "restaurant_name": "Starbucks",
-  "dish_name": "Pumpkin Spice Latte",
-  "price": 5.99,
-  "description": "Espresso and steamed milk with pumpkin spice flavors"
-}]
+    "order_id": 14,
+    "restaurant_name": "Domino's",
+    "dish_name": "Pepperoni Pizza",
+    "price": 10,
+    "description": "Pepperoni, mozzarella & tomato sauce"
+},
+{
+    "order_id": 15,
+    "restaurant_name": "Domino's",
+    "dish_name": "Garlic Bread",
+    "price": 4,
+    "description": "Garlic butter, herbs, cheese"
+},
+
+{
+    "order_id": 21,
+    "restaurant_name": "Burger King",
+    "dish_name": "Whopper",
+    "price": 8,
+    "description": "Vegetable patty, cheese, lettuce & tomato"
+},
+{
+    "order_id": 22,
+    "restaurant_name": "Burger King",
+    "dish_name": "Crispy Veg Burger",
+    "price": 3,
+    "description": "Crispy veg patty, lettuce &  mayo"
+},
+{
+    "order_id": 23,
+    "restaurant_name": "Burger King",
+    "dish_name": "Veggie Strips",
+    "price": 4,
+    "description": "Cheesy & crispy vegetable strips"
+},
+
+{
+    "order_id": 31,
+    "restaurant_name": "Starbucks",
+    "dish_name": "Caramel Macchiato",
+    "price": 4.99,
+    "description": "Espresso with steamed milk, vanilla syrup, and caramel drizzle"
+},
+{
+    "order_id": 32,
+    "restaurant_name": "Starbucks",
+    "dish_name": "Caffè Latte",
+    "price": 3.99,
+    "description": "Smooth espresso blended with steamed milk"
+},
+{
+    "order_id": 33,
+    "restaurant_name": "Starbucks",
+    "dish_name": "Mocha Frappuccino",
+    "price": 5.49,
+    "description": "Coffee, milk, and ice blended with rich mocha sauce"
+},
+{
+    "order_id": 34,
+    "restaurant_name": "Starbucks",
+    "dish_name": "Pumpkin Spice Latte",
+    "price": 5.99,
+    "description": "Espresso and steamed milk with pumpkin spice flavors"
+}
+]
