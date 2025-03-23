@@ -3,6 +3,7 @@ from PIL import Image, ImageTk
 import sys
 from dbconnect import get_menu_items
 import textwrap
+import os
 
 # Initialize Tkinter
 root = tk.Tk()
@@ -22,9 +23,9 @@ def add_to_cart(item_name):
 if len(sys.argv) < 2:
     restaurant_name = "Domino's"
     menu_items = [
-        (4, "Cheese Pizza", 19, "Cheese, tomato, corn"),
-        (5, "Paneer Pizza", 5, "Spicy paneer, bell peppers, mushroom, loads of cheese"),
-        (6, "Veggie Supreme", 7, "Capsicum, onion, olives, cheese"),
+        (4, "Cheese Pizza", 19, "Cheese, tomato, corn", "images/menu/cheese_pizza.jpg"),
+        (5, "Paneer Pizza", 5, "Spicy paneer, bell peppers, mushroom, loads of cheese", "images/menu/paneer_pizza.jpg"),
+        (6, "Veggie Supreme", 7, "Capsicum, onion, olives, cheese", "images/menu/veggie_supreme.jpg"),
     ]
 else:
     restaurant_name = sys.argv[1]
@@ -63,7 +64,7 @@ start_x = (screen_width - line_width) // 2  # Center the line
 image_refs = []  # Keep references to images
 
 for item in menu_items:
-    order_id, dish_name, price, description = item
+    order_id, dish_name, price, description, image_path = item
     wrapped_description = "\n".join(textwrap.wrap(description, width=50))  # Wrap text at 50 chars per line
     text = f"#{order_id} {dish_name} - ${price}\n{wrapped_description}"
 
@@ -99,19 +100,21 @@ for item in menu_items:
         fill="white", width=2
     )
 
-    # Load item image
+    # Load item-specific image
     try:
-        img_path = "images/dominos.jpg"  # Replace with the correct path
-        logo_image = Image.open(img_path)
-        logo_image = logo_image.resize((80, 80), Image.LANCZOS)
-        logo_photo = ImageTk.PhotoImage(logo_image)
+        if os.path.exists(image_path):
+            item_image = Image.open(image_path).resize((80, 80), Image.LANCZOS)
+        else:
+            print(f"Image not found for {dish_name}, using default image.")
+            item_image = Image.open("images/default.jpg").resize((80, 80), Image.LANCZOS)
 
-        image_refs.append(logo_photo)  # Keep a reference
+        item_photo = ImageTk.PhotoImage(item_image)
+        image_refs.append(item_photo)  # Keep a reference
 
-        # Place image on canvas
+        # Place image with **equal spacing above & below the line**
         canvas.create_image(
             image_x, y_position,
-            image=logo_photo,
+            image=item_photo,
             anchor="w"
         )
     except Exception as e:
