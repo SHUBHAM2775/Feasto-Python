@@ -17,35 +17,35 @@
     "$oid": "67df2751b330eb785f7ad588"
   },
   "name": "Burger King",
-  "image_path": "images/burger-king.jpg",
+  "image_path": "images/burger-king.png",
   "menu_items": [
     "Whopper",
     "Chicken Fries",
     "Onion Rings",
     "Pepsi"
   ],
-  "image": "images/burger-king.jpg"
+  "image": "images/burger-king.png"
 },
 {
   "_id": {
     "$oid": "67dfafee7fc44845c9b71237"
   },
   "name": "Domino's",
-  "image_path": "images/dominos.jpg",
+  "image_path": "images/dominos.png",
   "menu_items": [
     "Margherita Pizza",
     "Pepperoni Pizza",
     "Garlic Bread",
     "Coke"
   ],
-  "image": "images/dominos.jpg"
+  "image": "images/dominos.png"
 },
 {
   "_id": {
     "$oid": "67dfc198b3ef6c37356dcbb8"
   },
   "name": "Starbucks",
-  "image_path": "images/starbucks.jpg",
+  "image_path": "images/starbucks.png",
   "menu_items": [
     {
       "name": "Caramel Macchiato",
