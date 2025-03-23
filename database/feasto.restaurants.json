@@ -1,0 +1,72 @@
+[{
+  "_id": {
+    "$oid": "67df2751b330eb785f7ad587"
+  },
+  "name": "McDonald's",
+  "image_path": "images/mcd.png",
+  "menu_items": [
+    "Big Mac",
+    "McChicken",
+    "French Fries",
+    "Coke"
+  ],
+  "image": "images/mcd.png"
+},
+{
+  "_id": {
+    "$oid": "67df2751b330eb785f7ad588"
+  },
+  "name": "Burger King",
+  "image_path": "images/burger-king.jpg",
+  "menu_items": [
+    "Whopper",
+    "Chicken Fries",
+    "Onion Rings",
+    "Pepsi"
+  ],
+  "image": "images/burger-king.jpg"
+},
+{
+  "_id": {
+    "$oid": "67dfafee7fc44845c9b71237"
+  },
+  "name": "Domino's",
+  "image_path": "images/dominos.jpg",
+  "menu_items": [
+    "Margherita Pizza",
+    "Pepperoni Pizza",
+    "Garlic Bread",
+    "Coke"
+  ],
+  "image": "images/dominos.jpg"
+},
+{
+  "_id": {
+    "$oid": "67dfc198b3ef6c37356dcbb8"
+  },
+  "name": "Starbucks",
+  "image_path": "images/starbucks.jpg",
+  "menu_items": [
+    {
+      "name": "Caramel Macchiato",
+      "price": 4.99,
+      "description": "Espresso with steamed milk, vanilla syrup, and caramel drizzle"
+    },
+    {
+      "name": "Caffè Latte",
+      "price": 3.99,
+      "description": "Smooth espresso blended with steamed milk"
+    },
+    {
+      "name": "Mocha Frappuccino",
+      "price": 5.49,
+      "description": "Coffee, milk, and ice blended with rich mocha sauce"
+    },
+    {
+      "name": "Pumpkin Spice Latte",
+      "price": 5.99,
+      "description": "Espresso and steamed milk with pumpkin spice flavors"
+    }
+  ],
+  "image": "images/starbucks.png"
+}]
