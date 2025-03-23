@@ -1,15 +1,17 @@
 from pymongo import MongoClient
 
-def get_restaurants():
-    """Fetch restaurant data from MongoDB."""
-    client = MongoClient("mongodb://localhost:27017/")  # Adjust if needed
-    db = client["feasto"]  # Database name
-    collection = db["restaurants"]  # Collection name
+# Connect to MongoDB
+client = MongoClient("mongodb://localhost:27017/")
+db = client["feasto"]  # Replace with your actual DB name
 
-    restaurants_data = {}
-    for doc in collection.find():
-        restaurants_data[doc["name"]] = {
-            "image": doc["image_path"],  
-            "menu": doc["menu_items"]    
-        }
-    return restaurants_data
+def get_restaurants():
+    """Fetch restaurant names and images from MongoDB"""
+    restaurants = db.restaurants.find({})
+    result = {r["name"]: {"image": r["image"]} for r in restaurants}
+    print("Fetched Restaurants:", result)  # Debugging line
+    return result
+
+def get_menu_items(restaurant_name):
+    """Fetch menu items dynamically from MongoDB"""
+    menu_items = db.menu.find({"restaurant_name": restaurant_name})
+    return [(m["order_id"], m["dish_name"], m["price"], m["description"]) for m in menu_items]

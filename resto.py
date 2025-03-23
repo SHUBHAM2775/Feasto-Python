@@ -8,6 +8,9 @@ import subprocess
 # Fetch restaurant data
 restaurants = get_restaurants()
 
+if not restaurants:
+    print("No restaurants found in the database.")  # Debugging line
+
 # Initialize Tkinter
 root = tk.Tk()
 root.title("Feasto")
@@ -26,8 +29,11 @@ canvas.create_image(0, 0, image=bg_photo, anchor="nw")
 selected_restaurant = tk.StringVar()
 selected_restaurant.set("Choose By Restaurant")
 
-drop = ttk.Combobox(root, textvariable=selected_restaurant, 
-                    values=list(restaurants.keys()), 
+# Ensure restaurants are correctly passed as values
+restaurant_names = list(restaurants.keys())
+print("Dropdown Values:", restaurant_names)  # Debugging line
+
+drop = ttk.Combobox(root, textvariable=selected_restaurant, values=restaurant_names, 
                     font=('Georgia', 18), justify="center", state="readonly")
 drop.place(relx=0.5, y=50, anchor="center", width=300, height=40)
 
@@ -36,47 +42,46 @@ def open_menu():
     restaurant_name = selected_restaurant.get()
     if restaurant_name in restaurants:
         root.destroy()
-        menu_items = restaurants[restaurant_name]["menu"]
-        subprocess.Popen(["python", "menu.py", restaurant_name] + menu_items)
+        subprocess.Popen(["python", "menu.py", restaurant_name])
 
 menu_button = tk.Button(root, text="View Menu", font=("Arial", 14), command=open_menu)
 menu_button.place(relx=0.5, y=100, anchor="center", width=150, height=40)
 
-# Grid Configurations
-grid_size = 4  # Number of columns
-image_size = min(screen_width // (grid_size + 1), 250)  # Dynamic image size (max 250px)
-padding_x = (screen_width - (grid_size * image_size)) // (grid_size + 1)  # Equal spacing
-padding_y = 50  # Vertical spacing between rows
+# Display restaurant images
+columns = 4
+image_size = 200
+gap = 50
+label_gap = 15
 
-# Starting positions
-x_start, y_start = padding_x, 200
+x_start = (screen_width - (columns * (image_size + gap) - gap)) // 2
+y_start = 200
 x_pos, y_pos = x_start, y_start
 
-# Restaurant Images Grid
-for idx, (name, data) in enumerate(restaurants.items()):
+for index, (name, data) in enumerate(restaurants.items()):
     image_path = data["image"]
     
-    # Load image or placeholder
-    img = Image.open(image_path).resize((image_size, image_size)) if os.path.exists(image_path) else Image.new("RGB", (image_size, image_size), "gray")
+    if os.path.exists(image_path):
+        img = Image.open(image_path).resize((image_size, image_size))
+    else:
+        print(f"Image not found for {name}: {image_path}")  # Debugging line
+        img = Image.new("RGB", (image_size, image_size), "gray")
+
     photo = ImageTk.PhotoImage(img)
 
-    # Create bordered square grid
-    frame = tk.Frame(root, width=image_size, height=image_size, bg="white", highlightbackground="black", highlightthickness=2)
+    frame = tk.Frame(root, width=image_size, height=image_size, highlightbackground="black", highlightthickness=2)
     frame.place(x=x_pos, y=y_pos)
 
-    # Place image inside the frame
-    img_label = tk.Label(frame, image=photo, bg="white")
-    img_label.image = photo  # Keep a reference
+    img_label = tk.Label(frame, image=photo)
+    img_label.image = photo
     img_label.place(relx=0.5, rely=0.5, anchor="center")
 
-    # Label for restaurant name
-    label = tk.Label(root, text=name, font=("Arial", 14), bg="white")
-    label.place(x=x_pos + (image_size // 2), y=y_pos + image_size + 10, anchor="center")
+    label = tk.Label(root, text=name, font=("Arial", 14), fg="black", bg="white")
+    label.place(x=x_pos + (image_size // 2), y=y_pos + image_size + label_gap, anchor="center")
 
-    # Move to next grid position
-    x_pos += image_size + padding_x
-    if (idx + 1) % grid_size == 0:  # Move to next row after 4 images
+    x_pos += image_size + gap
+    if (index + 1) % columns == 0:
         x_pos = x_start
-        y_pos += image_size + padding_y
+        y_pos += image_size + gap + 50
+        
 
 root.mainloop()
