@@ -84,6 +84,4 @@ for index, (name, data) in enumerate(restaurants.items()):
         y_pos += image_size + gap + 50
         
 
-# Hello, I am truly flabbergasted 😄
-
 root.mainloop()
