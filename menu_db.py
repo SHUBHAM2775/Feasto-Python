@@ -17,21 +17,21 @@ menu_items = [
         "restaurant_name": "McDonald's",
         "dish_name": "McAloo Tikki",
         "price": 2,
-        "description": "Potato patty, lettuce, mayo"
+        "description": "Crispy Potato patty with lettuce, mayo & lots of cheese"
     },
     {
         "order_id": 2,
         "restaurant_name": "McDonald's",
         "dish_name": "McSpicy Paneer",
         "price": 5,
-        "description": "Paneer, lettuce, spicy sauce"
+        "description": "Flavourful Paneer layered with lettuce & spicy sauce"
     },
     {
         "order_id": 3,
         "restaurant_name": "McDonald's",
         "dish_name": "McChicken",
         "price": 4,
-        "description": "Chicken patty, mayo, lettuce"
+        "description": "Crispy Chicken patty loaded with mayo &  lettuce"
     },
     {
         "order_id": 4,
