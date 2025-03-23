@@ -68,19 +68,20 @@ for index, (name, data) in enumerate(restaurants.items()):
 
     photo = ImageTk.PhotoImage(img)
 
-    frame = tk.Frame(root, width=image_size, height=image_size, highlightbackground="black", highlightthickness=2)
+    # Black background frame with white border
+    frame = tk.Frame(root, width=image_size, height=image_size, bg="black", highlightbackground="white", highlightthickness=2)
     frame.place(x=x_pos, y=y_pos)
 
-    img_label = tk.Label(frame, image=photo)
+    img_label = tk.Label(frame, image=photo, bg="black")
     img_label.image = photo
     img_label.place(relx=0.5, rely=0.5, anchor="center")
 
-    label = tk.Label(root, text=name, font=("Arial", 14), fg="black", bg="white")
+    label = tk.Label(root, text=name, font=("Arial", 14, "bold"), fg="white", bg="black")
     label.place(x=x_pos + (image_size // 2), y=y_pos + image_size + label_gap, anchor="center")
 
     x_pos += image_size + gap
     if (index + 1) % columns == 0:
         x_pos = x_start
         y_pos += image_size + gap + 50
-        
+
 root.mainloop()

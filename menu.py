@@ -2,74 +2,133 @@ import tkinter as tk
 from PIL import Image, ImageTk
 import sys
 from dbconnect import get_menu_items
+import textwrap
 
+# Initialize Tkinter
 root = tk.Tk()
 root.title("Feasto")
 root.state('zoomed')
 
+# Function to go back to restaurant selection
 def open_resto():
     root.destroy()
     import resto
 
-# Default values for testing
+# Dummy cart action
+def add_to_cart(item_name):
+    print(f"Added to cart: {item_name}")
+
+# Get restaurant name and menu items
 if len(sys.argv) < 2:
-    restaurant_name = "Test Restaurant"
+    restaurant_name = "Domino's"
     menu_items = [
-        (1, "Burger", 5.99, "Juicy grilled beef burger"),
-        (2, "Pizza", 8.99, "Cheesy Margherita pizza"),
-        (3, "Pasta", 6.49, "Creamy Alfredo pasta"),
-    ]  # Example items for testing
+        (4, "Cheese Pizza", 19, "Cheese, tomato, corn"),
+        (5, "Paneer Pizza", 5, "Spicy paneer, bell peppers, mushroom, loads of cheese"),
+        (6, "Veggie Supreme", 7, "Capsicum, onion, olives, cheese"),
+    ]
 else:
     restaurant_name = sys.argv[1]
-    menu_items = get_menu_items(restaurant_name)  # Fetch from MongoDB
+    menu_items = get_menu_items(restaurant_name)
 
+# Get screen dimensions
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 
-# Load and resize background image while keeping aspect ratio
-bg_image = Image.open("images/restobg3.png")
+# Load and set background image
+bg_image = Image.open("images/restobg3.png")  # Replace with your own path
 bg_image = bg_image.resize((screen_width, screen_height), Image.LANCZOS)
 bg_photo = ImageTk.PhotoImage(bg_image)
 
-# Create a canvas for background and text
+# Create background canvas
 canvas = tk.Canvas(root, width=screen_width, height=screen_height, highlightthickness=0)
 canvas.place(relwidth=1, relheight=1)
-
-# Place the background image
 canvas.create_image(0, 0, image=bg_photo, anchor="nw")
 
-# Title Label (Transparent Effect)
+# Title
 canvas.create_text(
-    screen_width // 2, 100,
+    screen_width // 2, 80,
     text=f"{restaurant_name} Menu",
-    font=("Arial", 24, "bold"),
+    font=("Arial", 28, "bold"),
     fill="white"
 )
 
-# Display menu items with separator lines
-y_position = 200
-line_width = screen_width // 2  # Half of the screen width
+# Positioning for menu items
+y_position = 180
+text_x = screen_width * 0.25  # Adjust text position
+button_x = screen_width * 0.25  # Align button under text
+image_x = screen_width * 0.7  # Place images on the right
+line_width = screen_width * 0.5  # Half screen width
 start_x = (screen_width - line_width) // 2  # Center the line
+
+image_refs = []  # Keep references to images
 
 for item in menu_items:
     order_id, dish_name, price, description = item
-    text = f"#{order_id} {dish_name} - ${price}\n{description}"
+    wrapped_description = "\n".join(textwrap.wrap(description, width=50))  # Wrap text at 50 chars per line
+    text = f"#{order_id} {dish_name} - ${price}\n{wrapped_description}"
 
-    # Draw transparent text
+    # Display menu item text
     canvas.create_text(
-        screen_width * 0.3, y_position,
+        text_x, y_position,
         text=text,
         font=("Arial", 16),
         fill="white",
         anchor="w"
     )
 
+    # Add to Cart Button
+    add_button = tk.Button(
+        root,
+        text="Add to Cart",
+        font=("Arial", 10, "bold"),
+        bg="orange",
+        fg="black",
+        command=lambda name=dish_name: add_to_cart(name)
+    )
+    canvas.create_window(
+        button_x, y_position + 50,
+        window=add_button,
+        anchor="w",
+        width=120,
+        height=30
+    )
+
     # Separator line
-    canvas.create_line(start_x, y_position + 20, start_x + line_width, y_position + 20, fill="white", width=2)
+    canvas.create_line(
+        start_x, y_position + 80, start_x + line_width, y_position + 80,
+        fill="white", width=2
+    )
 
-    y_position += 80  # Increase spacing for next item
+    # Load item image
+    try:
+        img_path = "images/dominos.jpg"  # Replace with the correct path
+        logo_image = Image.open(img_path)
+        logo_image = logo_image.resize((80, 80), Image.LANCZOS)
+        logo_photo = ImageTk.PhotoImage(logo_image)
 
-exit = tk.Button(root, text="Back to Restaurant Selection", font=("Arial", 14), command=open_resto)
-exit.place(relx=0.5, y=screen_height-100, anchor="center", width=300, height=40)
+        image_refs.append(logo_photo)  # Keep a reference
 
+        # Place image on canvas
+        canvas.create_image(
+            image_x, y_position,
+            image=logo_photo,
+            anchor="w"
+        )
+    except Exception as e:
+        print("Image load error:", e)
+
+    y_position += 120  # Increase spacing for multi-line descriptions
+
+# Back Button
+exit_button = tk.Button(
+    root, text="Back to Restaurant Selection",
+    font=("Arial", 14), command=open_resto,
+    bg="white", fg="black"
+)
+canvas.create_window(
+    screen_width // 2, screen_height - 100,
+    window=exit_button, width=300, height=40
+)
+
+# Run the Tkinter loop
 root.mainloop()
