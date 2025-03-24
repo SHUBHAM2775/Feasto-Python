@@ -15,6 +15,10 @@ def open_resto():
     root.destroy()
     import resto
 
+def open_checkout():
+    root.destroy()
+    import checkout
+
 # Dummy cart action
 def add_to_cart(item_name):
     print(f"Added to cart: {item_name}")
@@ -129,8 +133,20 @@ exit_button = tk.Button(
     font=("Arial", 14), command=open_resto,
     bg="white", fg="black"
 )
+
+checkout = tk.Button(
+    root, text="Checkout",
+    font=("Arial", 14), command=open_checkout,
+    bg="white", fg="black"
+)
+
 canvas.create_window(
     screen_width // 2, screen_height - 100,
+    window=checkout, width=300, height=40
+)
+
+canvas.create_window(
+    screen_width // 2, screen_height - 50,
     window=exit_button, width=300, height=40
 )
 
