@@ -85,10 +85,7 @@ for index, (name, data) in enumerate(restaurants.items()):
 
     # Bind the image to open menu.py when clicked
     img_label.bind("<Button-1>", lambda event, r=name: open_menu(r))
-
-    label = tk.Label(root, text=name, font=("Arial", 14, "bold"), fg="white", bg="black")
-    label.place(x=x_pos + (image_size // 2), y=y_pos + image_size + label_gap, anchor="center")
-
+    
     x_pos += image_size + gap
     if (index + 1) % columns == 0:
         x_pos = x_start
