@@ -66,7 +66,7 @@ image_refs = []  # Keep references to images
 
 for item in menu_items:
     order_id, dish_name, price, description, image_path = item
-    wrapped_description = "\n".join(textwrap.wrap(description, width=80))  # Increased wrap width to 80 chars per line
+    wrapped_description = "\n".join(textwrap.wrap(description, width=75))  # Increased wrap width to 75 chars per line
     text = f"#{order_id} {dish_name} - ${price}\n{wrapped_description}"
 
     # Display menu item text
