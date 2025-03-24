@@ -1,0 +1,11 @@
+[{
+  "_id": {
+    "$oid": "67e1a4719a126f0e6067ce6d"
+  },
+  "table_number": "12",
+  "name": "Test",
+  "mobile": "1234",
+  "timestamp": {
+    "$date": "2025-03-24T18:29:05.435Z"
+  }
+}]
