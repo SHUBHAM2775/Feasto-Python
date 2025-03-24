@@ -38,10 +38,13 @@ drop = ttk.Combobox(root, textvariable=selected_restaurant, values=restaurant_na
 drop.place(relx=0.5, y=50, anchor="center", width=300, height=40)
 
 # Open Menu Function
-def open_menu():
-    restaurant_name = selected_restaurant.get()
+def open_menu(restaurant_name=None):
+    """Opens the menu.py script for the selected restaurant"""
+    root.destroy()
+    if restaurant_name is None:
+        restaurant_name = selected_restaurant.get()
+
     if restaurant_name in restaurants:
-        root.destroy()
         subprocess.Popen(["python", "menu.py", restaurant_name])
 
 menu_button = tk.Button(root, text="View Menu", font=("Arial", 14), command=open_menu)
@@ -57,6 +60,8 @@ x_start = (screen_width - (columns * (image_size + gap) - gap)) // 2
 y_start = 200
 x_pos, y_pos = x_start, y_start
 
+image_refs = {}  # Dictionary to keep image references
+
 for index, (name, data) in enumerate(restaurants.items()):
     image_path = data["image"]
     
@@ -67,18 +72,20 @@ for index, (name, data) in enumerate(restaurants.items()):
         img = Image.new("RGB", (image_size, image_size), "gray")
 
     photo = ImageTk.PhotoImage(img)
+    image_refs[name] = photo  # Keep reference to avoid garbage collection
 
     # Black background frame with white border
     frame = tk.Frame(root, width=image_size, height=image_size, bg="black", highlightbackground="white", highlightthickness=2)
     frame.place(x=x_pos, y=y_pos)
 
-    img_label = tk.Label(frame, image=photo, bg="black")
+    # Image Label (Clickable)
+    img_label = tk.Label(frame, image=photo, bg="black", cursor="hand2")
     img_label.image = photo
     img_label.place(relx=0.5, rely=0.5, anchor="center")
 
-    label = tk.Label(root, text=name, font=("Arial", 14, "bold"), fg="white", bg="black")
-    label.place(x=x_pos + (image_size // 2), y=y_pos + image_size + label_gap, anchor="center")
-
+    # Bind the image to open menu.py when clicked
+    img_label.bind("<Button-1>", lambda event, r=name: open_menu(r))
+    
     x_pos += image_size + gap
     if (index + 1) % columns == 0:
         x_pos = x_start

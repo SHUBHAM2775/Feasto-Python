@@ -59,13 +59,14 @@ text_x = screen_width * 0.25  # Adjust text position
 button_x = screen_width * 0.25  # Align button under text
 image_x = screen_width * 0.7  # Place images on the right
 line_width = screen_width * 0.5  # Half screen width
-start_x = (screen_width - line_width) // 2  # Center the line
+start_x = (screen_width - line_width) // 2 + 10  # Add 10px padding
+end_x = start_x + line_width - 20  # Add 10px padding on both sides
 
 image_refs = []  # Keep references to images
 
 for item in menu_items:
     order_id, dish_name, price, description, image_path = item
-    wrapped_description = "\n".join(textwrap.wrap(description, width=50))  # Wrap text at 50 chars per line
+    wrapped_description = "\n".join(textwrap.wrap(description, width=85))  # Increased wrap width to 85 chars per line
     text = f"#{order_id} {dish_name} - ${price}\n{wrapped_description}"
 
     # Display menu item text
@@ -77,26 +78,26 @@ for item in menu_items:
         anchor="w"
     )
 
-    # Add to Cart Button
+    # Add to Cart Button with padding
     add_button = tk.Button(
         root,
         text="Add to Cart",
         font=("Arial", 10, "bold"),
         bg="orange",
         fg="black",
+        padx=7, pady=7,  # Add 7px padding around the button
         command=lambda name=dish_name: add_to_cart(name)
     )
     canvas.create_window(
         button_x, y_position + 50,
         window=add_button,
         anchor="w",
-        width=120,
-        height=30
+        width=120, height=30
     )
 
-    # Separator line
+    # Separator line with padding
     canvas.create_line(
-        start_x, y_position + 80, start_x + line_width, y_position + 80,
+        start_x, y_position + 80, end_x, y_position + 80,
         fill="white", width=2
     )
 
