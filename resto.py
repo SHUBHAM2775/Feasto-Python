@@ -84,4 +84,6 @@ for index, (name, data) in enumerate(restaurants.items()):
         x_pos = x_start
         y_pos += image_size + gap + 50
 
+#Push
+
 root.mainloop()
