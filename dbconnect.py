@@ -54,9 +54,26 @@ def get_all_user_entries():
     """Return all stored user entries"""
     return list(db.users.find({}, {"_id": 0}))  # Exclude MongoDB's default `_id` field
 
+def add_to_cart_db(order_id, restaurant_name, dish_name, price, quantity=1):
+    """Insert a menu item into the cart collection"""
+    cart_item = {
+        "order_id": order_id,
+        "restaurant_name": restaurant_name,
+        "dish_name": dish_name,
+        "price": price,
+        "quantity": quantity,
+        "timestamp": datetime.utcnow()
+    }
+
+    db.cart.insert_one(cart_item)
+    print(f"🛒 Cart item added: {cart_item}")
+
 # Example usage for testing
 if __name__ == "__main__":
     insert_user_entry("7", "Aarya", "9876543211")
     all_entries = get_all_user_entries()
     for user in all_entries:
         print(user)
+
+    # Test cart insert
+    add_to_cart_db(1, "Domino's", "Cheese Pizza", 10.99, quantity=2)
