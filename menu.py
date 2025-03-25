@@ -1,7 +1,7 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 import sys
-from dbconnect import get_menu_items
+from dbconnect import get_menu_items, add_to_cart_db  # Import Mongo insert function
 import textwrap
 import os
 
@@ -15,9 +15,14 @@ def open_resto():
     root.destroy()
     import resto
 
-# Dummy cart action
-def add_to_cart(item_name):
-    print(f"Added to cart: {item_name}")
+# Function to add item to cart and update button text
+def add_to_cart(order_id, dish_name, price, restaurant_name, button):
+    try:
+        add_to_cart_db(order_id, restaurant_name, dish_name, price, quantity=1)
+        print(f"✅ Added to cart: {dish_name}")
+        button.config(text="Added ✅", state="disabled", bg="green")
+    except Exception as e:
+        print(f"❌ Failed to add to cart: {e}")
 
 # Get restaurant name and menu items
 if len(sys.argv) < 2:
@@ -36,7 +41,7 @@ screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 
 # Load and set background image
-bg_image = Image.open("images/restobg3.png")  # Replace with your own path
+bg_image = Image.open("images/restobg3.png")
 bg_image = bg_image.resize((screen_width, screen_height), Image.LANCZOS)
 bg_photo = ImageTk.PhotoImage(bg_image)
 
@@ -55,18 +60,18 @@ canvas.create_text(
 
 # Positioning for menu items
 y_position = 180
-text_x = screen_width * 0.25  # Adjust text position
-button_x = screen_width * 0.25  # Align button under text
-image_x = screen_width * 0.7  # Place images on the right
-line_width = screen_width * 0.5  # Half screen width
-start_x = (screen_width - line_width) // 2 + 10  # Add 10px padding
-end_x = start_x + line_width - 20  # Add 10px padding on both sides
+text_x = screen_width * 0.25
+button_x = screen_width * 0.25
+image_x = screen_width * 0.7
+line_width = screen_width * 0.5
+start_x = (screen_width - line_width) // 2 + 10
+end_x = start_x + line_width - 20
 
-image_refs = []  # Keep references to images
+image_refs = []
 
 for item in menu_items:
     order_id, dish_name, price, description, image_path = item
-    wrapped_description = "\n".join(textwrap.wrap(description, width=75))  # Increased wrap width to 75 chars per line
+    wrapped_description = "\n".join(textwrap.wrap(description, width=75))
     text = f"#{order_id} {dish_name} - ${price}\n{wrapped_description}"
 
     # Display menu item text
@@ -78,16 +83,19 @@ for item in menu_items:
         anchor="w"
     )
 
-    # Add to Cart Button with padding
+    # Add to Cart Button
     add_button = tk.Button(
         root,
         text="Add to Cart",
         font=("Arial", 10, "bold"),
         bg="orange",
         fg="black",
-        padx=7, pady=7,  # Add 7px padding around the button
-        command=lambda name=dish_name: add_to_cart(name)
+        padx=7, pady=7
     )
+
+    # Button command with reference to the button itself
+    add_button.config(command=lambda oid=order_id, name=dish_name, pr=price, btn=add_button: add_to_cart(oid, name, pr, restaurant_name, btn))
+
     canvas.create_window(
         button_x, y_position + 50,
         window=add_button,
@@ -95,13 +103,13 @@ for item in menu_items:
         width=120, height=30
     )
 
-    # Separator line with padding
+    # Separator line
     canvas.create_line(
         start_x, y_position + 80, end_x, y_position + 80,
         fill="white", width=2
     )
 
-    # Load item-specific image
+    # Load and place image
     try:
         if os.path.exists(image_path):
             item_image = Image.open(image_path).resize((80, 80), Image.LANCZOS)
@@ -110,18 +118,13 @@ for item in menu_items:
             item_image = Image.open("images/default.jpg").resize((80, 80), Image.LANCZOS)
 
         item_photo = ImageTk.PhotoImage(item_image)
-        image_refs.append(item_photo)  # Keep a reference
+        image_refs.append(item_photo)
+        canvas.create_image(image_x, y_position, image=item_photo, anchor="w")
 
-        # Place image with **equal spacing above & below the line**
-        canvas.create_image(
-            image_x, y_position,
-            image=item_photo,
-            anchor="w"
-        )
     except Exception as e:
         print("Image load error:", e)
 
-    y_position += 120  # Increase spacing for multi-line descriptions
+    y_position += 120
 
 # Back Button
 exit_button = tk.Button(
@@ -136,4 +139,3 @@ canvas.create_window(
 
 # Run the Tkinter loop
 root.mainloop()
-# 
