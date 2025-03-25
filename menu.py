@@ -15,24 +15,19 @@ def open_resto():
     root.destroy()
     import resto
 
-<<<<<<< HEAD
+# ✅ **Define Checkout Function**
 def open_checkout():
-    root.destroy()
-    import checkout
+    root.destroy()  # Close the current window
+    import checkout  # Make sure checkout.py exists
 
-# Dummy cart action
-def add_to_cart(item_name):
-    print(f"Added to cart: {item_name}")
-=======
 # Function to add item to cart and update button text
 def add_to_cart(order_id, dish_name, price, restaurant_name, button):
     try:
         add_to_cart_db(order_id, restaurant_name, dish_name, price, quantity=1)
         print(f"✅ Added to cart: {dish_name}")
-        button.config(text="Added ✅", state="disabled", bg="white",fg="black")
+        button.config(text="Added ✅", state="disabled", bg="white", fg="black")
     except Exception as e:
         print(f"❌ Failed to add to cart: {e}")
->>>>>>> Siddhi
 
 # Get restaurant name and menu items
 if len(sys.argv) < 2:
@@ -136,22 +131,24 @@ for item in menu_items:
 
     y_position += 120
 
-# Back Button
+# ✅ **Checkout Button**
+checkout_button = tk.Button(
+    root, text="Checkout",
+    font=("Arial", 14), command=open_checkout,
+    bg="white", fg="black"
+)
+
+# ✅ **Back Button**
 exit_button = tk.Button(
     root, text="Back to Restaurant Selection",
     font=("Arial", 14), command=open_resto,
     bg="white", fg="black"
 )
 
-checkout = tk.Button(
-    root, text="Checkout",
-    font=("Arial", 14), command=open_checkout,
-    bg="white", fg="black"
-)
-
+# Place Buttons on Canvas
 canvas.create_window(
     screen_width // 2, screen_height - 100,
-    window=checkout, width=300, height=40
+    window=checkout_button, width=300, height=40
 )
 
 canvas.create_window(
