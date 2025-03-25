@@ -77,3 +77,26 @@ if __name__ == "__main__":
 
     # Test cart insert
     add_to_cart_db(1, "Domino's", "Cheese Pizza", 10.99, quantity=2)
+    
+def get_cart_items(restaurant_name):
+    """Fetch items & quantities from the cart collection"""
+    cart_items = db.cart.find({"restaurant_name": restaurant_name})
+    return [(item["dish_name"], item["quantity"]) for item in cart_items]
+
+def update_cart_quantity(restaurant_name, dish_name, change):
+    """Increase or decrease item quantity in the cart."""
+    cart_item = db.cart.find_one({"restaurant_name": restaurant_name, "dish_name": dish_name})
+
+    if cart_item:
+        new_quantity = max(0, cart_item["quantity"] + change)  # Ensure quantity is not negative
+
+        if new_quantity > 0:
+            db.cart.update_one(
+                {"restaurant_name": restaurant_name, "dish_name": dish_name},
+                {"$set": {"quantity": new_quantity}}
+            )
+        else:
+            db.cart.delete_one({"restaurant_name": restaurant_name, "dish_name": dish_name})  # Remove if 0
+        
+        return new_quantity
+    return 0  # Return 0 if item does not exist
