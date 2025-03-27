@@ -8,6 +8,10 @@ root = tk.Tk()
 root.title("Feasto")
 root.state('zoomed')  # Fullscreen mode
 
+def open_payment():
+    root.destroy()
+    import payment
+
 # Fetch restaurants
 restaurants = get_restaurants()
 restaurant_names = list(restaurants.keys())
@@ -119,5 +123,9 @@ else:
         font=("Arial", 18),
         fill="red"
     )
+    
+    
+proceed_button = tk.Button(root, text="Proceed to Payment", font=("Arial", 16), bg="green", fg="white", command=open_payment)
+proceed_button.place(x=630 ,y=750, width=screen_width * 0.2, height=50)
 
 root.mainloop()
