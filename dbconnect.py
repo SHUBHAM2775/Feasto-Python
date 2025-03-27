@@ -68,16 +68,6 @@ def add_to_cart_db(order_id, restaurant_name, dish_name, price, quantity=1):
     db.cart.insert_one(cart_item)
     print(f"🛒 Cart item added: {cart_item}")
 
-# Example usage for testing
-if __name__ == "__main__":
-    insert_user_entry("7", "Aarya", "9876543211")
-    all_entries = get_all_user_entries()
-    for user in all_entries:
-        print(user)
-
-    # Test cart insert
-    add_to_cart_db(1, "Domino's", "Cheese Pizza", 10.99, quantity=2)
-    
 def get_cart_items(restaurant_name):
     """Fetch items & quantities from the cart collection"""
     cart_items = db.cart.find({"restaurant_name": restaurant_name})
@@ -100,3 +90,9 @@ def update_cart_quantity(restaurant_name, dish_name, change):
         
         return new_quantity
     return 0  # Return 0 if item does not exist
+
+# ✅ NEW FUNCTION: Clear cart collection when resto.py starts
+def clear_cart():
+    """Deletes all documents from the cart collection."""
+    result = db.cart.delete_many({})
+    print(f"🗑 Cleared {result.deleted_count} items from the cart.")

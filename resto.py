@@ -1,9 +1,12 @@
-from dbconnect import get_restaurants
+from dbconnect import get_restaurants, clear_cart  # Import the new clear_cart function
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
 import os
 import subprocess
+
+# Clear cart every time resto.py is opened
+clear_cart()  # Deletes all documents from the cart collection
 
 # Fetch restaurant data
 restaurants = get_restaurants()
