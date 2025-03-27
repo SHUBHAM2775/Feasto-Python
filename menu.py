@@ -46,7 +46,11 @@ screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 
 # Load and set background image
+<<<<<<< HEAD
 bg_image = Image.open("images/restobg3.png")
+=======
+bg_image = Image.open("images/restobg3.png")  
+>>>>>>> menuscroll
 bg_image = bg_image.resize((screen_width, screen_height), Image.LANCZOS)
 bg_photo = ImageTk.PhotoImage(bg_image)
 
@@ -63,6 +67,7 @@ canvas.create_text(
     fill="white"
 )
 
+<<<<<<< HEAD
 # Positioning for menu items
 y_position = 180
 text_x = screen_width * 0.25
@@ -73,6 +78,31 @@ start_x = (screen_width - line_width) // 2 + 10
 end_x = start_x + line_width - 20
 
 image_refs = []
+=======
+# ---------------- SCROLLABLE TRANSPARENT MENU ----------------
+frame_container = tk.Frame(root)
+frame_container.place(relx=0.5, rely=0.5, anchor="center", width=screen_width * 0.8, height=screen_height * 0.7)
+
+# Create a Canvas for scrolling (no background to appear "transparent")
+scroll_canvas = tk.Canvas(frame_container, highlightthickness=0, bd=0) 
+scroll_canvas.pack(side="left", fill="both", expand=True)
+
+# Add a Scrollbar
+scrollbar = tk.Scrollbar(frame_container, orient="vertical", command=scroll_canvas.yview)
+scrollbar.pack(side="right", fill="y")
+
+# Configure scrolling
+scroll_canvas.configure(yscrollcommand=scrollbar.set)
+scroll_canvas.bind("<Configure>", lambda e: scroll_canvas.configure(scrollregion=scroll_canvas.bbox("all")))
+
+# Inner frame to hold menu items (match background with the canvas)
+menu_frame = tk.Frame(scroll_canvas, bg="black")  # Make bg same as the canvas
+scroll_window = scroll_canvas.create_window((0, 0), window=menu_frame, anchor="nw", width=screen_width * 0.75)
+
+# ---------------- POPULATING MENU ITEMS ----------------
+y_position = 20  # Start position inside menu frame
+image_refs = []  # Keep references to images
+>>>>>>> menuscroll
 
 for item in menu_items:
     order_id, dish_name, price, description, image_path = item
@@ -80,21 +110,24 @@ for item in menu_items:
     text = f"#{order_id} {dish_name} - ${price}\n{wrapped_description}"
 
     # Display menu item text
-    canvas.create_text(
-        text_x, y_position,
+    tk.Label(
+        menu_frame,
         text=text,
         font=("Arial", 16),
-        fill="white",
-        anchor="w"
-    )
+        fg="white",
+        bg="black",  # Set to match background
+        anchor="w",
+        justify="left"
+    ).grid(row=y_position, column=0, padx=20, pady=10, sticky="w")
 
     # Add to Cart Button
     add_button = tk.Button(
-        root,
+        menu_frame,
         text="Add to Cart",
         font=("Arial", 10, "bold"),
         bg="orange",
         fg="black",
+<<<<<<< HEAD
         padx=7, pady=7
     )
 
@@ -113,6 +146,12 @@ for item in menu_items:
         start_x, y_position + 80, end_x, y_position + 80,
         fill="white", width=2
     )
+=======
+        padx=7, pady=7,
+        command=lambda name=dish_name: add_to_cart(name)
+    )
+    add_button.grid(row=y_position, column=1, padx=20, pady=10, sticky="w")
+>>>>>>> menuscroll
 
     # Load and place image
     try:
@@ -123,12 +162,20 @@ for item in menu_items:
             item_image = Image.open("images/default.jpg").resize((80, 80), Image.LANCZOS)
 
         item_photo = ImageTk.PhotoImage(item_image)
+<<<<<<< HEAD
         image_refs.append(item_photo)
         canvas.create_image(image_x, y_position, image=item_photo, anchor="w")
+=======
+        image_refs.append(item_photo)  # Keep reference
+
+        # Display image
+        tk.Label(menu_frame, image=item_photo, bg="black").grid(row=y_position, column=2, padx=20, pady=10)
+>>>>>>> menuscroll
 
     except Exception as e:
         print("Image load error:", e)
 
+<<<<<<< HEAD
     y_position += 120
 
 # ✅ **Checkout Button**
@@ -139,20 +186,52 @@ checkout_button = tk.Button(
 )
 
 # ✅ **Back Button**
+=======
+    y_position += 1  # Move to the next row
+
+# Update scroll region when new items are added
+menu_frame.update_idletasks()
+scroll_canvas.config(scrollregion=scroll_canvas.bbox("all"))
+
+# Enable scrolling with the mouse wheel
+def on_mouse_wheel(event):
+    scroll_canvas.yview_scroll(-1 * (event.delta // 120), "units")
+
+root.bind_all("<MouseWheel>", on_mouse_wheel)
+
+# ---------------- BUTTONS ----------------
+>>>>>>> menuscroll
 exit_button = tk.Button(
     root, text="Back to Restaurant Selection",
     font=("Arial", 14), command=open_resto,
-    bg="white", fg="black"
+    bg="orange", fg="black"
 )
 
+<<<<<<< HEAD
 # Place Buttons on Canvas
 canvas.create_window(
     screen_width // 2, screen_height - 100,
     window=checkout_button, width=300, height=40
+=======
+checkout = tk.Button(
+    root, text="Checkout",
+    font=("Arial", 14), command=open_checkout,
+    bg="orange", fg="black"
+)
+
+
+total_width = (2 * 300) + 50  # total_width = (2 * button_width) + button_gap
+start_x = (screen_width - total_width) // 2
+
+canvas.create_window(
+    start_x + 100, screen_height - 100,
+    window=checkout, width=300, height=40
+>>>>>>> menuscroll
 )
 
 canvas.create_window(
-    screen_width // 2, screen_height - 50,
+    #start_x + button_width + button_gap
+    start_x + 300 + 200, screen_height - 100,
     window=exit_button, width=300, height=40
 )
 
