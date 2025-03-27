@@ -1,9 +1,9 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 import sys
-from dbconnect import get_menu_items, add_to_cart_db
-import textwrap
 import os
+import textwrap
+from dbconnect import get_menu_items, add_to_cart_db
 
 # Initialize Tkinter
 root = tk.Tk()
@@ -18,7 +18,7 @@ def open_resto():
 # Function to open checkout
 def open_checkout():
     root.destroy()
-    import checkout  # Make sure checkout.py exists
+    import checkout  # Ensure checkout.py exists
 
 # Function to add item to cart and update button text
 def add_to_cart(order_id, dish_name, price, restaurant_name, button):
@@ -53,19 +53,21 @@ bg_photo = ImageTk.PhotoImage(bg_image)
 bg_label = tk.Label(root, image=bg_photo)
 bg_label.place(relwidth=1, relheight=1)
 
-# Title Label
-title_label = tk.Label(root, text=f"{restaurant_name} Menu", font=("Arial", 28, "bold"), fg="white", bg="black")
+# Title Label (Transparent Background)
+title_label = tk.Label(root, text=f"{restaurant_name} Menu", font=("Arial", 28, "bold"), fg="white", bg="black", padx=10, pady=5)
 title_label.place(relx=0.5, rely=0.05, anchor="center")
 
-# Scrollable Menu Frame
-scroll_canvas = tk.Canvas(root, width=screen_width, height=screen_height - 200, bg="black", highlightthickness=0)
-scroll_frame = tk.Frame(scroll_canvas, bg="black")
-scrollbar = tk.Scrollbar(root, orient="vertical", command=scroll_canvas.yview)
+# Scrollable Menu Frame (Fully Transparent)
+scroll_canvas = tk.Canvas(root, width=screen_width, height=screen_height - 200, highlightthickness=0, bg="black")
+scroll_canvas.place(relx=0.01, rely=0.15, relwidth=0.96, relheight=0.75)
 
+# Scrollbar
+scrollbar = tk.Scrollbar(root, orient="vertical", command=scroll_canvas.yview)
+scrollbar.place(relx=0.98, rely=0.15, relheight=0.75)
 scroll_canvas.configure(yscrollcommand=scrollbar.set)
 
-scrollbar.place(relx=0.98, rely=0.15, relheight=0.75)  # Right-side scrollbar
-scroll_canvas.place(relx=0.01, rely=0.15, relwidth=0.96, relheight=0.75)
+# Scroll Frame (Transparent)
+scroll_frame = tk.Frame(scroll_canvas, bg="black")  # Black blends better with transparency
 scroll_window = scroll_canvas.create_window((0, 0), window=scroll_frame, anchor="nw", width=screen_width - 40)
 
 # Store images to prevent garbage collection
@@ -77,7 +79,7 @@ for item in menu_items:
     wrapped_description = "\n".join(textwrap.wrap(description, width=75))
     text = f"#{order_id} {dish_name} - ${price}\n{wrapped_description}"
 
-    # Menu Item Frame
+    # Menu Item Frame (Transparent)
     item_frame = tk.Frame(scroll_frame, bg="black", padx=10, pady=10)
     item_frame.pack(fill="x", padx=20, pady=10)
 
@@ -98,7 +100,7 @@ for item in menu_items:
     except Exception as e:
         print("Image load error:", e)
 
-    # Menu Text Label
+    # Menu Text Label (Transparent)
     text_label = tk.Label(item_frame, text=text, font=("Arial", 16), fg="white", bg="black", anchor="w", justify="left")
     text_label.pack(side="left", padx=10)
 
@@ -111,11 +113,11 @@ for item in menu_items:
 scroll_frame.update_idletasks()
 scroll_canvas.config(scrollregion=scroll_canvas.bbox("all"))
 
-# Checkout and Back Buttons (fixed at the bottom)
-checkout_button = tk.Button(root, text="Checkout", font=("Arial", 14), command=open_checkout, bg="white", fg="black")
+# Checkout and Back Buttons (Fixed at Bottom, Transparent)
+checkout_button = tk.Button(root, text="Checkout", font=("Arial", 14), command=open_checkout, bg="black", fg="white", padx=10, pady=5)
 checkout_button.place(x=screen_width // 2 - 150, y=screen_height - 100, width=300, height=40)
 
-exit_button = tk.Button(root, text="Back to Restaurant Selection", font=("Arial", 14), command=open_resto, bg="white", fg="black")
+exit_button = tk.Button(root, text="Back to Restaurant Selection", font=("Arial", 14), command=open_resto, bg="black", fg="white", padx=10, pady=5)
 exit_button.place(x=screen_width // 2 - 150, y=screen_height - 50, width=300, height=40)
 
 # Run the Tkinter loop
