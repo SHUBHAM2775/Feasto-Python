@@ -127,7 +127,6 @@ for item in menu_items:
         font=("Arial", 10, "bold"),
         bg="orange",
         fg="black",
-<<<<<<< HEAD
         padx=7, pady=7
     )
 
@@ -146,12 +145,6 @@ for item in menu_items:
         start_x, y_position + 80, end_x, y_position + 80,
         fill="white", width=2
     )
-=======
-        padx=7, pady=7,
-        command=lambda name=dish_name: add_to_cart(name)
-    )
-    add_button.grid(row=y_position, column=1, padx=20, pady=10, sticky="w")
->>>>>>> menuscroll
 
     # Load and place image
     try:
