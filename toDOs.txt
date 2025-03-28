@@ -3,7 +3,7 @@ table no numeric, name alphabetic --DONE
 space in restro.py- maybe add few restros
 payment gateway- upi
 exciting offers- coupons, bonuses
-change rates of the dishes
+change rates of the dishes --DONE
 after payment show the estimated time with order no and table no *
 
 
