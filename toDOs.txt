@@ -1,0 +1,12 @@
+phone no- 10 digit
+table no numeric, name alphabetic
+space in restro.py- maybe add few restros
+payment gateway- upi
+exciting offers- coupons, bonuses
+change rates of the dishes
+after payment show the estimated time with order no and table no *
+
+
+Optional stuff 
+menu bg :/
+checkout scrollable
