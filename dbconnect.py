@@ -96,3 +96,11 @@ def clear_cart():
     """Deletes all documents from the cart collection."""
     result = db.cart.delete_many({})
     print(f"🗑 Cleared {result.deleted_count} items from the cart.")
+
+def get_latest_user():
+    """Fetch the most recent user entry from the database"""
+    user = db.users.find_one(
+        {},
+        sort=[("timestamp", -1)]  # Sort by timestamp descending
+    )
+    return user if user else {"name": "N/A", "table_number": "N/A"}
