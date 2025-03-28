@@ -1,6 +1,6 @@
 from PIL import Image, ImageTk
 import tkinter as tk
-from dbconnect import insert_user_entry  # Import database function
+from dbconnect import insert_user_entry, verify_user  # Import database functions
 
 # Initialize Tkinter
 root = tk.Tk()
@@ -46,8 +46,24 @@ def validate_input():
     error_label.config(text="")  # Clear error if validation passes
     return True
 
-def submit_entry():
-    """Saves user data and moves to the restaurant selection page."""
+def login():
+    """Verifies user credentials and opens restaurant selection page."""
+    if not validate_input():
+        return
+    
+    user_name = name.get().strip()
+    mobile_number = mobile.get().strip()
+
+    # Verify user credentials (only name and mobile)
+    if verify_user(user_name, mobile_number):
+        print(f"✅ Login successful: {user_name}, {mobile_number}")
+        root.destroy()
+        import resto
+    else:
+        error_label.config(text="⚠️ Invalid credentials! Please try again or Sign up.")
+
+def signup():
+    """Saves new user data and clears the form."""
     if not validate_input():
         return
     
@@ -55,13 +71,25 @@ def submit_entry():
     user_name = name.get().strip()
     mobile_number = mobile.get().strip()
 
+    # Check if user already exists (only check name and mobile)
+    if verify_user(user_name, mobile_number):
+        error_label.config(text="⚠️ User already exists! Please login instead.")
+        return
+
     # Save to database
     insert_user_entry(table_number, user_name, mobile_number)
-    print(f"✅ Entry saved: {table_number}, {user_name}, {mobile_number}")
+    print(f"✅ New user registered: {table_number}, {user_name}, {mobile_number}")
 
-    # Open the restaurant selection page
-    root.destroy()  
-    import resto  
+    # Clear all fields
+    table.delete(0, tk.END)
+    table.insert(0, "Enter Table Number")
+    name.delete(0, tk.END)
+    name.insert(0, "Enter Your Name")
+    mobile.delete(0, tk.END)
+    mobile.insert(0, "Enter Mobile Number")
+
+    # Show success message
+    error_label.config(text="✅ Signup successful! Please login to proceed.", fg="green")
 
 # Entry Fields
 table = tk.Entry(root, width=35, font=('Arial', 16), bg="grey", fg="black")
@@ -83,8 +111,11 @@ mobile.place(relx=0.5, rely=0.6, anchor="center")
 error_label = tk.Label(root, text="", font=('Arial', 14), fg="red", bg="black")
 error_label.place(relx=0.5, rely=0.65, anchor="center")
 
-# Submit Button
-submit = tk.Button(root, text="Submit", font=('Arial', 16), bg="yellow", fg="black", command=submit_entry, width=10)
-submit.place(relx=0.5, rely=0.7, anchor="center")
+# Login and Signup Buttons
+login_btn = tk.Button(root, text="Login", font=('Arial', 16), bg="yellow", fg="black", command=login, width=10)
+login_btn.place(relx=0.4, rely=0.7, anchor="center")
+
+signup_btn = tk.Button(root, text="Signup", font=('Arial', 16), bg="yellow", fg="black", command=signup, width=10)
+signup_btn.place(relx=0.6, rely=0.7, anchor="center")
 
 root.mainloop()

@@ -104,3 +104,11 @@ def get_latest_user():
         sort=[("timestamp", -1)]  # Sort by timestamp descending
     )
     return user if user else {"name": "N/A", "table_number": "N/A"}
+
+def verify_user(name, mobile):
+    """Verify if user exists in the database using name and mobile only"""
+    user = db.users.find_one({
+        "name": name,
+        "mobile": mobile
+    })
+    return user is not None
