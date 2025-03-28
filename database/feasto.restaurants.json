@@ -1,72 +1,130 @@
-[{
-  "_id": {
-    "$oid": "67df2751b330eb785f7ad587"
-  },
-  "name": "McDonald's",
-  "image_path": "images/mcd.png",
-  "menu_items": [
-    "Big Mac",
-    "McChicken",
-    "French Fries",
-    "Coke"
-  ],
-  "image": "images/mcd.png"
-},
-{
-  "_id": {
-    "$oid": "67df2751b330eb785f7ad588"
-  },
-  "name": "Burger King",
-  "image_path": "images/burger-king.png",
-  "menu_items": [
-    "Whopper",
-    "Chicken Fries",
-    "Onion Rings",
-    "Pepsi"
-  ],
-  "image": "images/burger-king.png"
-},
-{
-  "_id": {
-    "$oid": "67dfafee7fc44845c9b71237"
-  },
-  "name": "Domino's",
-  "image_path": "images/dominos.png",
-  "menu_items": [
-    "Margherita Pizza",
-    "Pepperoni Pizza",
-    "Garlic Bread",
-    "Coke"
-  ],
-  "image": "images/dominos.png"
-},
-{
-  "_id": {
-    "$oid": "67dfc198b3ef6c37356dcbb8"
-  },
-  "name": "Starbucks",
-  "image_path": "images/starbucks.png",
-  "menu_items": [
-    {
-      "name": "Caramel Macchiato",
-      "price": 4.99,
-      "description": "Espresso with steamed milk, vanilla syrup, and caramel drizzle"
+[
+  {
+    "_id": {
+      "$oid": "67df2751b330eb785f7ad587"
     },
-    {
-      "name": "Caffè Latte",
-      "price": 3.99,
-      "description": "Smooth espresso blended with steamed milk"
+    "name": "McDonald's",
+    "image_path": "images/mcd.png",
+    "menu_items": [
+      "Big Mac",
+      "McChicken",
+      "French Fries",
+      "Coke"
+    ],
+    "image": "images/mcd.png"
+  },
+  {
+    "_id": {
+      "$oid": "67df2751b330eb785f7ad588"
     },
-    {
-      "name": "Mocha Frappuccino",
-      "price": 5.49,
-      "description": "Coffee, milk, and ice blended with rich mocha sauce"
+    "name": "Burger King",
+    "image_path": "images/burger-king.png",
+    "menu_items": [
+      "Whopper",
+      "Chicken Fries",
+      "Onion Rings",
+      "Pepsi"
+    ],
+    "image": "images/burger-king.png"
+  },
+  {
+    "_id": {
+      "$oid": "67dfafee7fc44845c9b71237"
     },
-    {
-      "name": "Pumpkin Spice Latte",
-      "price": 5.99,
-      "description": "Espresso and steamed milk with pumpkin spice flavors"
-    }
-  ],
-  "image": "images/starbucks.png"
-}]
+    "name": "Domino's",
+    "image_path": "images/dominos.png",
+    "menu_items": [
+      "Margherita Pizza",
+      "Pepperoni Pizza",
+      "Garlic Bread",
+      "Coke"
+    ],
+    "image": "images/dominos.png"
+  },
+  {
+    "_id": {
+      "$oid": "67dfc198b3ef6c37356dcbb8"
+    },
+    "name": "Starbucks",
+    "image_path": "images/starbucks.png",
+    "menu_items": [
+      {
+        "name": "Caramel Macchiato",
+        "price": 4.99,
+        "description": "Espresso with steamed milk, vanilla syrup, and caramel drizzle"
+      },
+      {
+        "name": "Caffè Latte",
+        "price": 3.99,
+        "description": "Smooth espresso blended with steamed milk"
+      },
+      {
+        "name": "Mocha Frappuccino",
+        "price": 5.49,
+        "description": "Coffee, milk, and ice blended with rich mocha sauce"
+      },
+      {
+        "name": "Pumpkin Spice Latte",
+        "price": 5.99,
+        "description": "Espresso and steamed milk with pumpkin spice flavors"
+      }
+    ],
+    "image": "images/starbucks.png"
+  },
+  {
+    "_id": {
+      "$oid": "67e0c2d9f4a87b1234abcd05"
+    },
+    "name": "Kailash Parbat",
+    "image_path": "images/kailashParbat.png",
+    "menu_items": [
+      "Pani Puri",
+      "Ragda Pattice",
+      "Chole Bhature",
+      "Falooda"
+    ],
+    "image": "images/kailashParbat.png"
+  },
+  {
+    "_id": {
+      "$oid": "67e0c2d9f4a87b1234abcd06"
+    },
+    "name": "Chaayos",
+    "image_path": "images/chaayos.png",
+    "menu_items": [
+      "Kulhad Chai",
+      "Bun Maska",
+      "Paneer Makhani Wrap",
+      "Chocolate Cake"
+    ],
+    "image": "images/chaayos.png"
+  },
+  {
+    "_id": {
+      "$oid": "67e0c2d9f4a87b1234abcd07"
+    },
+    "name": "Wow! Momo",
+    "image_path": "images/wowMomos.png",
+    "menu_items": [
+      "Steamed Momos",
+      "Fried Momos",
+      "Momo Burger",
+      "Chocolate Momos"
+    ],
+    "image": "images/wowMomos.png"
+  },
+  {
+    "_id": {
+      "$oid": "67e0c2d9f4a87b1234abcd08"
+    },
+    "name": "Naturals Ice Cream",
+    "image_path": "images/naturals.png",
+    "menu_items": [
+      "Tender Coconut Ice Cream",
+      "Alphonso Mango Ice Cream",
+      "Sitaphal Ice Cream",
+      "Chocolate Ice Cream"
+    ],
+    "image": "images/naturals.png"
+  }
+]
