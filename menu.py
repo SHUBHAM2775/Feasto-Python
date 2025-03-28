@@ -25,7 +25,7 @@ def add_to_cart(order_id, dish_name, price, restaurant_name, button):
     try:
         add_to_cart_db(order_id, restaurant_name, dish_name, price, quantity=1)
         print(f"✅ Added to cart: {dish_name}")
-        button.config(text="Added ✅", state="disabled", bg="gray", fg="white")
+        button.config(text="Added ✅", state="disabled", bg="white", fg="black")
     except Exception as e:
         print(f"❌ Failed to add to cart: {e}")
 
@@ -63,9 +63,10 @@ bg_photo = ImageTk.PhotoImage(bg_image)
 bg_label = tk.Label(root, image=bg_photo)
 bg_label.place(relwidth=1, relheight=1)
 
-# Title Label (Transparent Background)
-title_label = tk.Label(root, text=f"{restaurant_name} Menu", font=("Arial", 28, "bold"), fg="white", bg="black", padx=10, pady=5)
-title_label.place(relx=0.5, rely=0.05, anchor="center")
+canvas = tk.Canvas(root, width=screen_width, height=screen_height)
+canvas.pack(fill="both", expand=True)
+canvas.create_image(0, 0, image=bg_photo, anchor="nw")
+canvas.create_text(screen_width/2, 100, text=f"{restaurant_name} Menu", font=("Arial", 28, "bold"), fill="white")
 
 # Scrollable Menu Frame
 scroll_canvas = tk.Canvas(root, width=screen_width, height=screen_height - 200, highlightthickness=0, bg="black")
@@ -87,7 +88,7 @@ y_position = 20
 for item in menu_items:
     order_id, dish_name, price, description, image_path = item
     wrapped_description = "\n".join(textwrap.wrap(description, width=75))
-    text = f"#{order_id} {dish_name} - ${price}\n{wrapped_description}"
+    text = f" {dish_name} - ${price}\n {wrapped_description}"
 
     # Menu Item Frame
     item_frame = tk.Frame(scroll_frame, bg="black", padx=10, pady=10)

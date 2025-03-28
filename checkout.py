@@ -126,6 +126,6 @@ else:
     
     
 proceed_button = tk.Button(root, text="Proceed to Payment", font=("Arial", 16), bg="green", fg="white", command=open_payment)
-proceed_button.place(x=630 ,y=750, width=screen_width * 0.2, height=50)
+proceed_button.place(x=700 ,y=750, width=screen_width * 0.2, height=50)
 
 root.mainloop()
