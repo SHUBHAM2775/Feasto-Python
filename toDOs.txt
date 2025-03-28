@@ -1,5 +1,5 @@
-phone no- 10 digit
-table no numeric, name alphabetic
+phone no- 10 digit --DONE
+table no numeric, name alphabetic --DONE
 space in restro.py- maybe add few restros
 payment gateway- upi
 exciting offers- coupons, bonuses

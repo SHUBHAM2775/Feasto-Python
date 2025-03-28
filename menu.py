@@ -90,7 +90,7 @@ y_position = 20
 for item in menu_items:
     order_id, dish_name, price, description, image_path = item
     wrapped_description = "\n".join(textwrap.wrap(description, width=75))
-    text = f" {dish_name} - ${price}\n {wrapped_description}"
+    text = f" {dish_name} - ₹{price}\n {wrapped_description}"
 
     # Menu Item Frame
     item_frame = tk.Frame(scroll_frame, bg="black", padx=10, pady=10)
