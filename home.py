@@ -22,22 +22,38 @@ def clear_placeholder(event):
     if event.widget.get() in ["Enter Table Number", "Enter Your Name", "Enter Mobile Number"]:
         event.widget.delete(0, tk.END)
 
-def submit_entry():
-    """Saves user data and moves to the restaurant selection page."""
+def validate_input():
+    """Validates user inputs."""
     table_number = table.get().strip()
     user_name = name.get().strip()
     mobile_number = mobile.get().strip()
 
-    # Validate inputs
-    if not table_number or table_number == "Enter Table Number":
-        print("⚠️ Please enter a valid table number!")
+    # Validate table number (numeric only)
+    if not table_number.isdigit():
+        error_label.config(text="⚠️ Invalid Table Number! Must be numeric.")
+        return False
+    
+    # Validate user name (alphabetic only)
+    if not user_name.replace(" ", "").isalpha():
+        error_label.config(text="⚠️ Invalid Name! Must contain only letters.")
+        return False
+    
+    # Validate mobile number (exactly 10 digits)
+    if not (mobile_number.isdigit() and len(mobile_number) == 10):
+        error_label.config(text="⚠️ Invalid Mobile Number! Must be 10 digits.")
+        return False
+    
+    error_label.config(text="")  # Clear error if validation passes
+    return True
+
+def submit_entry():
+    """Saves user data and moves to the restaurant selection page."""
+    if not validate_input():
         return
-    if not user_name or user_name == "Enter Your Name":
-        print("⚠️ Please enter a valid name!")
-        return
-    if not mobile_number or mobile_number == "Enter Mobile Number":
-        print("⚠️ Please enter a valid mobile number!")
-        return
+    
+    table_number = table.get().strip()
+    user_name = name.get().strip()
+    mobile_number = mobile.get().strip()
 
     # Save to database
     insert_user_entry(table_number, user_name, mobile_number)
@@ -48,7 +64,6 @@ def submit_entry():
     import resto  
 
 # Entry Fields
-
 table = tk.Entry(root, width=35, font=('Arial', 16), bg="grey", fg="black")
 table.insert(0, "Enter Table Number")  
 table.bind("<FocusIn>", clear_placeholder)  
@@ -63,6 +78,10 @@ mobile = tk.Entry(root, width=35, font=('Arial', 16), bg="grey", fg="black")
 mobile.insert(0, "Enter Mobile Number")  
 mobile.bind("<FocusIn>", clear_placeholder)  
 mobile.place(relx=0.5, rely=0.6, anchor="center")
+
+# Error Label
+error_label = tk.Label(root, text="", font=('Arial', 14), fg="red", bg="black")
+error_label.place(relx=0.5, rely=0.65, anchor="center")
 
 # Submit Button
 submit = tk.Button(root, text="Submit", font=('Arial', 16), bg="yellow", fg="black", command=submit_entry, width=10)
