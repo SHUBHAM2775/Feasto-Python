@@ -26,6 +26,8 @@ def add_to_cart(order_id, dish_name, price, restaurant_name, button):
         add_to_cart_db(order_id, restaurant_name, dish_name, price, quantity=1)
         print(f"✅ Added to cart: {dish_name}")
         button.config(text="Added ✅", state="disabled", bg="white", fg="black")
+        button.unbind("<Enter>")  
+        button.unbind("<Leave>")
     except Exception as e:
         print(f"❌ Failed to add to cart: {e}")
 
