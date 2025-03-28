@@ -63,14 +63,5 @@ cash_btn = create_payment_button(root, "Cash Payment", 0, 0)
 cash_btn.configure(command=lambda: handle_payment("Cash"))
 cash_btn.place(x=775, y=500, anchor="center")
 
-# Back button
-back_btn = Button(root, 
-                 text="← Back",
-                 font=("Arial", 16),
-                 bg="#ff4444",
-                 fg="white",
-                 command=lambda: [root.destroy(), __import__('payment')],
-                 cursor="hand2")
-back_btn.place(x=50, y=50)
 
 root.mainloop()

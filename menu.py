@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import *
 from PIL import Image, ImageTk
 import sys
 import os
@@ -65,10 +66,11 @@ bg_photo = ImageTk.PhotoImage(bg_image)
 bg_label = tk.Label(root, image=bg_photo)
 bg_label.place(relwidth=1, relheight=1)
 
+# Title Label (Transparent Background)
 canvas = tk.Canvas(root, width=screen_width, height=screen_height)
 canvas.pack(fill="both", expand=True)
 canvas.create_image(0, 0, image=bg_photo, anchor="nw")
-canvas.create_text(screen_width/2, 100, text=f"{restaurant_name} Menu", font=("Arial", 28, "bold"), fill="white")
+canvas.create_text(screen_width/2, 75, text=f"{restaurant_name} Menu", font=("Arial", 28, "bold"), fill="white")
 
 # Scrollable Menu Frame
 scroll_canvas = tk.Canvas(root, width=screen_width, height=screen_height - 200, highlightthickness=0, bg="black")
