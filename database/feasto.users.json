@@ -1,33 +1,33 @@
 [{
   "_id": {
-    "$oid": "67e6b9df47484da7e9bc363e"
+    "$oid": "67e8191782a0ba877a3faf08"
   },
-  "table_number": "1",
-  "name": "NS",
-  "mobile": "1234567890",
-  "timestamp": {
-    "$date": "2025-03-28T15:01:51.249Z"
-  }
-},
-{
-  "_id": {
-    "$oid": "67e6b9e647484da7e9bc363f"
-  },
-  "table_number": "2",
   "name": "SU",
   "mobile": "1234567890",
+  "feasto_points": 100,
   "timestamp": {
-    "$date": "2025-03-28T15:01:58.553Z"
+    "$date": "2025-03-29T16:00:23.803Z"
   }
 },
 {
   "_id": {
-    "$oid": "67e6b9ed47484da7e9bc3640"
+    "$oid": "67e821f3652c86777cae9a34"
   },
-  "table_number": "3",
+  "name": "NS",
+  "mobile": "1234567890",
+  "feasto_points": 100,
+  "timestamp": {
+    "$date": "2025-03-29T16:38:11.654Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67e821fc652c86777cae9a35"
+  },
   "name": "SS",
   "mobile": "1234567890",
+  "feasto_points": 100,
   "timestamp": {
-    "$date": "2025-03-28T15:02:05.169Z"
+    "$date": "2025-03-29T16:38:20.523Z"
   }
 }]
