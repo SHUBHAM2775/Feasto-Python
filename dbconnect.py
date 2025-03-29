@@ -112,3 +112,31 @@ def verify_user(name, mobile):
         "mobile": mobile
     })
     return user is not None
+
+def get_user_details():
+    """Fetch the most recent user's details from the database"""
+    user = db.users.find_one(
+        {},
+        sort=[("timestamp", -1)]  # Sort by timestamp descending
+    )
+    if user:
+        return {
+            "name": user.get("name", "N/A"),
+            "mobile": user.get("mobile", "N/A"),
+            "table_number": user.get("table_number", "N/A")
+        }
+    return {"name": "N/A", "mobile": "N/A", "table_number": "N/A"}
+
+def get_user_by_credentials(name, mobile):
+    """Fetch specific user's details from the database using login credentials"""
+    user = db.users.find_one({
+        "name": name,
+        "mobile": mobile
+    })
+    if user:
+        return {
+            "name": user.get("name", "N/A"),
+            "mobile": user.get("mobile", "N/A"),
+            "table_number": user.get("table_number", "N/A")
+        }
+    return {"name": "N/A", "mobile": "N/A", "table_number": "N/A"}

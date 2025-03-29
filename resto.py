@@ -28,6 +28,33 @@ canvas = tk.Canvas(root, width=screen_width, height=screen_height)
 canvas.pack(fill="both", expand=True)
 canvas.create_image(0, 0, image=bg_photo, anchor="nw")
 
+# Replace the circle creation code with an image button
+user_icon_size = 150  # Increased size
+user_icon_x = user_icon_size // 2 + 20  # Adjusted x position
+user_icon_y = user_icon_size // 2 + 20  # Adjusted y position
+
+# Load and resize the user icon image
+try:
+    user_icon = Image.open("images/user.jpg").resize((user_icon_size, user_icon_size))
+    user_photo = ImageTk.PhotoImage(user_icon)
+except:
+    print("User icon image not found, creating placeholder")
+    user_icon = Image.new("RGB", (user_icon_size, user_icon_size), "gray")
+    user_photo = ImageTk.PhotoImage(user_icon)
+
+# Create label for the user icon
+user_label = tk.Label(root, image=user_photo, cursor="hand2", bg="black")
+user_label.image = user_photo  # Keep a reference
+user_label.place(x=20, y=20)  # Simplified positioning to fit perfectly in corner
+
+# Function to open user.py
+def open_user():
+    root.destroy()
+    subprocess.Popen(["python", "user.py", "resto"])
+
+# Make the image clickable
+user_label.bind("<Button-1>", lambda event: open_user())
+
 # Dropdown
 selected_restaurant = tk.StringVar()
 selected_restaurant.set("Choose By Restaurant")

@@ -53,10 +53,13 @@ def login():
     
     user_name = name.get().strip()
     mobile_number = mobile.get().strip()
+    table_number = table.get().strip()
 
     # Verify user credentials (only name and mobile)
     if verify_user(user_name, mobile_number):
         print(f"✅ Login successful: {user_name}, {mobile_number}")
+        # Store user details in database instead of file
+        insert_user_entry(table_number, user_name, mobile_number)
         root.destroy()
         import resto
     else:

@@ -72,6 +72,33 @@ canvas.pack(fill="both", expand=True)
 canvas.create_image(0, 0, image=bg_photo, anchor="nw")
 canvas.create_text(screen_width/2, 75, text=f"{restaurant_name} Menu", font=("Arial", 28, "bold"), fill="white")
 
+# After canvas creation and before scroll frame setup
+# Add user profile button
+user_icon_size = 150
+user_icon_x = user_icon_size // 2 + 20
+user_icon_y = user_icon_size // 2 + 20
+
+# Load and resize the user icon image
+try:
+    user_icon = Image.open("images/user.jpg").resize((user_icon_size, user_icon_size))
+    user_photo = ImageTk.PhotoImage(user_icon)
+except:
+    print("User icon image not found, creating placeholder")
+    user_icon = Image.new("RGB", (user_icon_size, user_icon_size), "gray")
+    user_photo = ImageTk.PhotoImage(user_icon)
+
+# Create label for the user icon
+user_label = tk.Label(root, image=user_photo, cursor="hand2", bg="black")
+user_label.image = user_photo
+user_label.place(x=20, y=20)
+
+def open_user():
+    root.destroy()
+    import subprocess
+    subprocess.Popen(["python", "user.py", "menu"])
+
+user_label.bind("<Button-1>", lambda event: open_user())
+
 # Scrollable Menu Frame
 scroll_canvas = tk.Canvas(root, width=screen_width, height=screen_height - 200, highlightthickness=0, bg="black")
 scroll_canvas.place(relx=0.01, rely=0.15, relwidth=0.96, relheight=0.75)
