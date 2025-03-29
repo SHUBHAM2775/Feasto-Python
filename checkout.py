@@ -2,6 +2,10 @@ import tkinter as tk
 from PIL import Image, ImageTk
 import sys
 from dbconnect import get_restaurants, get_cart_items, update_cart_quantity  # Import cart functions
+import subprocess
+
+# Get table number from command line arguments
+table_number = sys.argv[2] if len(sys.argv) > 2 else "N/A"  # Since restaurant name is argv[1]
 
 # Initialize Tkinter
 root = tk.Tk()
@@ -10,7 +14,7 @@ root.state('zoomed')  # Fullscreen mode
 
 def open_bill():
     root.destroy()
-    import bill
+    subprocess.Popen(["python", "bill.py", table_number])
 
 # Fetch restaurants
 restaurants = get_restaurants()
@@ -61,7 +65,7 @@ user_label.place(x=20, y=20)
 def open_user():
     root.destroy()
     import subprocess
-    subprocess.Popen(["python", "user.py", "checkout"])
+    subprocess.Popen(["python", "user.py", "checkout", table_number])
 
 user_label.bind("<Button-1>", lambda event: open_user())
 

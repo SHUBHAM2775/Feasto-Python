@@ -4,6 +4,7 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 import os
 import subprocess
+import sys
 
 # Clear cart every time resto.py is opened
 clear_cart()  # Deletes all documents from the cart collection
@@ -50,7 +51,7 @@ user_label.place(x=20, y=20)  # Simplified positioning to fit perfectly in corne
 # Function to open user.py
 def open_user():
     root.destroy()
-    subprocess.Popen(["python", "user.py", "resto"])
+    subprocess.Popen(["python", "user.py", "resto", table_number])
 
 # Make the image clickable
 user_label.bind("<Button-1>", lambda event: open_user())
@@ -75,7 +76,7 @@ def open_menu(restaurant_name=None):
         restaurant_name = selected_restaurant.get()
 
     if restaurant_name in restaurants:
-        subprocess.Popen(["python", "menu.py", restaurant_name])
+        subprocess.Popen(["python", "menu.py", restaurant_name, table_number])
 
 menu_button = tk.Button(root, text="View Menu", font=("Arial", 14), command=open_menu)
 menu_button.place(relx=0.5, y=100, anchor="center", width=150, height=40)
@@ -120,5 +121,8 @@ for index, (name, data) in enumerate(restaurants.items()):
     if (index + 1) % columns == 0:
         x_pos = x_start
         y_pos += image_size + gap + 50
+
+# Near the top of the file, after imports
+table_number = sys.argv[1] if len(sys.argv) > 1 else "N/A"
 
 root.mainloop()

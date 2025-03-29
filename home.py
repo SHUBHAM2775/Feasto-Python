@@ -58,10 +58,10 @@ def login():
     # Verify user credentials (only name and mobile)
     if verify_user(user_name, mobile_number):
         print(f"✅ Login successful: {user_name}, {mobile_number}")
-        # Store user details in database instead of file
-        insert_user_entry(table_number, user_name, mobile_number)
+        # Pass table number as command line argument
         root.destroy()
-        import resto
+        import subprocess
+        subprocess.Popen(["python", "resto.py", table_number])
     else:
         error_label.config(text="⚠️ Invalid credentials! Please try again or Sign up.")
 
@@ -70,18 +70,18 @@ def signup():
     if not validate_input():
         return
     
-    table_number = table.get().strip()
     user_name = name.get().strip()
     mobile_number = mobile.get().strip()
+    table_number = table.get().strip()
 
     # Check if user already exists (only check name and mobile)
     if verify_user(user_name, mobile_number):
         error_label.config(text="⚠️ User already exists! Please login instead.")
         return
 
-    # Save to database
-    insert_user_entry(table_number, user_name, mobile_number)
-    print(f"✅ New user registered: {table_number}, {user_name}, {mobile_number}")
+    # Save to database without table number
+    insert_user_entry(user_name, mobile_number)
+    print(f"✅ New user registered: {user_name}, {mobile_number}")
 
     # Clear all fields
     table.delete(0, tk.END)

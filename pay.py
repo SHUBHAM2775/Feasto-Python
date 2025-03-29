@@ -2,6 +2,11 @@ from tkinter import *
 import tkinter as tk
 from PIL import Image, ImageTk
 from dbconnect import db
+import subprocess
+import sys
+
+# Get table number from command line arguments
+table_number = sys.argv[1] if len(sys.argv) > 1 else "N/A"
 
 def create_payment_button(window, text, x, y):
     return Button(window, 
@@ -63,8 +68,7 @@ user_label.place(x=20, y=20)
 
 def open_user():
     root.destroy()
-    import subprocess
-    subprocess.Popen(["python", "user.py", "pay"])
+    subprocess.Popen(["python", "user.py", "pay", table_number])
 
 user_label.bind("<Button-1>", lambda event: open_user())
 

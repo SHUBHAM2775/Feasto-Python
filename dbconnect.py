@@ -37,12 +37,12 @@ def get_menu_items(restaurant_name):
 
     return result
 
-def insert_user_entry(table_number, name, mobile):
+def insert_user_entry(name, mobile):
     """Insert a new user entry into the database"""
     new_entry = {
-        "table_number": table_number,
         "name": name,
         "mobile": mobile,
+        "feasto_points": 100,  # Default points for new users
         "timestamp": datetime.utcnow()
     }
 
@@ -123,9 +123,10 @@ def get_user_details():
         return {
             "name": user.get("name", "N/A"),
             "mobile": user.get("mobile", "N/A"),
-            "table_number": user.get("table_number", "N/A")
+            "table_number": user.get("table_number", "N/A"),
+            "feasto_points": user.get("feasto_points", 0)
         }
-    return {"name": "N/A", "mobile": "N/A", "table_number": "N/A"}
+    return {"name": "N/A", "mobile": "N/A", "table_number": "N/A", "feasto_points": 0}
 
 def get_user_by_credentials(name, mobile):
     """Fetch specific user's details from the database using login credentials"""
@@ -137,6 +138,7 @@ def get_user_by_credentials(name, mobile):
         return {
             "name": user.get("name", "N/A"),
             "mobile": user.get("mobile", "N/A"),
-            "table_number": user.get("table_number", "N/A")
+            "table_number": user.get("table_number", "N/A"),
+            "feasto_points": user.get("feasto_points", 0)
         }
-    return {"name": "N/A", "mobile": "N/A", "table_number": "N/A"}
+    return {"name": "N/A", "mobile": "N/A", "table_number": "N/A", "feasto_points": 0}

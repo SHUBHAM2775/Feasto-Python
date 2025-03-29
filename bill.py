@@ -2,10 +2,15 @@ from tkinter import *
 import tkinter as tk
 from PIL import Image, ImageTk
 from dbconnect import db, get_latest_user  # Import the database connection and get_latest_user function
+import subprocess
+import sys
+
+# Get table number from command line arguments BEFORE using it
+table_number = sys.argv[1] if len(sys.argv) > 1 else "N/A"
 
 def payment_options():
     root.destroy()  # Close current window
-    import pay  # Open payment options window
+    subprocess.Popen(["python", "pay.py", table_number])
 
 root = tk.Tk()
 root.title("Feasto: Payment")
@@ -46,8 +51,7 @@ user_label.place(x=20, y=20)
 
 def open_user():
     root.destroy()
-    import subprocess
-    subprocess.Popen(["python", "user.py", "bill"])
+    subprocess.Popen(["python", "user.py", "bill", table_number])
 
 user_label.bind("<Button-1>", lambda event: open_user())
 
@@ -60,7 +64,6 @@ canvas.create_rectangle(250, 200, 1300, 700,
 # Get user details first
 user = get_latest_user()
 name = user['name']
-table_number = user['table_number']
 
 # Create a circle with table number in top right corner
 circle_x = 1200  # X position of circle center

@@ -3,9 +3,11 @@ from PIL import Image, ImageTk
 import tkinter as tk
 from dbconnect import get_latest_user
 import sys
+import subprocess
 
 # Get the previous page from command line argument
 previous_page = sys.argv[1] if len(sys.argv) > 1 else "bill"  # Default to bill.py if no argument
+table_number = sys.argv[2] if len(sys.argv) > 2 else "N/A"    # Get table number from command line
 
 root = tk.Tk()
 root.title("Feasto")
@@ -15,9 +17,11 @@ root.state('zoomed')
 try:
     user_details = get_latest_user()  # Use the same function as bill.py
     if not user_details:
-        user_details = {"name": "N/A", "mobile": "N/A", "table_number": "N/A"}
+        user_details = {"name": "N/A", "mobile": "N/A"}
+    # Add table number to user_details
+    user_details["table_number"] = table_number
 except:
-    user_details = {"name": "N/A", "mobile": "N/A", "table_number": "N/A"}
+    user_details = {"name": "N/A", "mobile": "N/A", "table_number": table_number}
 
 # Create canvas
 canvas = tk.Canvas(root, highlightthickness=0)
@@ -49,17 +53,17 @@ def go_back():
     """Return to the previous page based on where we came from"""
     root.destroy()
     if previous_page == "bill":
-        import bill
+        subprocess.Popen(["python", "bill.py", table_number])
     elif previous_page == "menu":
-        import resto
+        subprocess.Popen(["python", "resto.py", table_number])
     elif previous_page == "checkout":
-        import checkout
+        subprocess.Popen(["python", "checkout.py", restaurant_name, table_number])
     elif previous_page == "pay":
-        import pay
+        subprocess.Popen(["python", "pay.py", table_number])
     elif previous_page == "resto":
-        import resto
+        subprocess.Popen(["python", "resto.py", table_number])
     else:
-        import bill  # Default fallback
+        subprocess.Popen(["python", "bill.py", table_number])  # Default fallback
 
 # Create a back button
 back_button = tk.Button(root, text="Back", 

@@ -5,21 +5,25 @@ import sys
 import os
 import textwrap
 from dbconnect import get_menu_items, add_to_cart_db
+import subprocess
 
 # Initialize Tkinter
 root = tk.Tk()
 root.title("Feasto")
 root.state('zoomed')
 
+# Near the top of the file
+table_number = sys.argv[2] if len(sys.argv) > 2 else "N/A"
+
 # Function to go back to restaurant selection
 def open_resto():
     root.destroy()
-    import resto
+    subprocess.Popen(["python", "resto.py", table_number])
 
 # Function to open checkout
 def open_checkout():
     root.destroy()
-    import checkout  
+    subprocess.Popen(["python", "checkout.py", restaurant_name, table_number])
 
 # Function to add item to cart and update button text
 def add_to_cart(order_id, dish_name, price, restaurant_name, button):
@@ -94,8 +98,7 @@ user_label.place(x=20, y=20)
 
 def open_user():
     root.destroy()
-    import subprocess
-    subprocess.Popen(["python", "user.py", "menu"])
+    subprocess.Popen(["python", "user.py", "menu", table_number])
 
 user_label.bind("<Button-1>", lambda event: open_user())
 
