@@ -61,9 +61,13 @@ canvas.create_rectangle(250, 200, 1300, 700,
                        fill="grey", 
                        stipple='gray50')
 
-# Get user details first
-user = get_latest_user()
-name = user['name']
+# Get user details from current_user.txt
+try:
+    with open("current_user.txt", "r") as f:
+        user_name, mobile_number, table_number = f.read().strip().split(",")
+except:
+    user_name = "N/A"
+    mobile_number = "N/A"
 
 # Create a circle with table number in top right corner
 circle_x = 1200  # X position of circle center
@@ -91,7 +95,7 @@ canvas.create_text(
 )
 
 # Centered title with customer name
-canvas.create_text(775, 250, text=f"Bill Details for {name}", font=("Arial", 30, "bold"), fill="#ffffff")
+canvas.create_text(775, 250, text=f"Bill Details for {user_name}", font=("Arial", 30, "bold"), fill="#ffffff")
 
 # Single separator line after title
 canvas.create_line(300, 300, 1250, 300, fill="white", width=2)

@@ -58,6 +58,9 @@ def login():
     # Verify user credentials (only name and mobile)
     if verify_user(user_name, mobile_number):
         print(f"✅ Login successful: {user_name}, {mobile_number}")
+        # Store credentials in temporary file
+        with open("current_user.txt", "w") as f:
+            f.write(f"{user_name},{mobile_number},{table_number}")
         # Pass table number as command line argument
         root.destroy()
         import subprocess
