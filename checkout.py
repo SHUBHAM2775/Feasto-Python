@@ -94,6 +94,7 @@ end_x = start_x + line_width
 # Dictionary to store label references for quantity updates
 quantity_labels = {}
 item_frames = {}
+canvas_items = {}  # Store canvas items for removal
 
 # Proper Alignment Positions
 dish_x = screen_width * 0.35  # Dish name position
@@ -104,10 +105,28 @@ def update_quantity_label(dish_name, new_quantity):
     if new_quantity > 0:
         quantity_labels[dish_name].config(text=str(new_quantity))
     else:
-        # Remove item from the screen
-        item_frames[dish_name].destroy()
+        # Remove all widgets and canvas items for this dish
+        for widget in item_frames[dish_name].values():
+            if isinstance(widget, tk.Widget):
+                widget.destroy()
+        
+        # Remove canvas items (rectangle and text)
+        for item_id in canvas_items[dish_name]:
+            canvas.delete(item_id)
+        
+        # Clean up references
         del item_frames[dish_name]
         del quantity_labels[dish_name]
+        del canvas_items[dish_name]
+        
+        # Check if cart is empty after removal
+        if not item_frames:
+            canvas.create_text(
+                screen_width // 2, y_position,
+                text="Your cart is empty",
+                font=("Arial", 18),
+                fill="red"
+            )
 
 def increase_quantity(dish_name):
     """Increase item quantity in MongoDB and update UI."""
@@ -121,30 +140,58 @@ def decrease_quantity(dish_name):
 
 if cart_items:
     for dish_name, quantity in cart_items:
-        # Create frame for each cart item
-        item_frame = tk.Frame(root, bg="black")
-        item_frame.place(x=start_x, y=y_position, width=screen_width * 0.5, height=50)
+        # Create a semi-transparent black rectangle for the background
+        rect_id = canvas.create_rectangle(
+            start_x, y_position,
+            start_x + screen_width * 0.25, y_position + 50,
+            fill="black",
+            stipple="gray50"  # This creates a semi-transparent effect
+        )
 
-        # Dish name label (aligned to left)
-        dish_label = tk.Label(item_frame, text=dish_name, font=("Arial", 16), fg="white", bg="black", anchor="w", width=30)
-        dish_label.pack(side="left", padx=10)
+        # Dish name
+        text_id = canvas.create_text(
+            start_x + 15, y_position + 25,
+            text=dish_name,
+            font=("Arial", 16),
+            fill="white",
+            anchor="w"
+        )
+
+        # Store canvas items for this dish
+        canvas_items[dish_name] = [rect_id, text_id]
+
+        # Create a frame for quantity controls
+        control_frame = tk.Frame(root, bg="black")
+        control_frame.place(x=start_x + screen_width * 0.25, y=y_position + 10)
 
         # "-" Button
-        minus_button = tk.Button(item_frame, text="-", font=("Arial", 12, "bold"), bg="red", fg="white",
-                                 command=lambda name=dish_name: decrease_quantity(name), width=3)
-        minus_button.pack(side="left", padx=10)
+        minus_button = tk.Button(control_frame, text="-", font=("Arial", 12, "bold"), 
+                               bg="red", fg="white",
+                               command=lambda name=dish_name: decrease_quantity(name), 
+                               width=3)
+        minus_button.pack(side="left", padx=5)
 
-        # Quantity Label (Centered between + and -)
-        quantity_label = tk.Label(item_frame, text=str(quantity), font=("Arial", 16), fg="white", bg="black", width=5)
-        quantity_label.pack(side="left", padx=10)
+        # Quantity Label
+        quantity_label = tk.Label(control_frame, text=str(quantity), 
+                                font=("Arial", 16), fg="white", 
+                                bg="black", width=3)
+        quantity_label.pack(side="left", padx=5)
         quantity_labels[dish_name] = quantity_label
 
         # "+" Button
-        plus_button = tk.Button(item_frame, text="+", font=("Arial", 12, "bold"), bg="green", fg="white",
-                                command=lambda name=dish_name: increase_quantity(name), width=3)
-        plus_button.pack(side="left", padx=10)
+        plus_button = tk.Button(control_frame, text="+", font=("Arial", 12, "bold"), 
+                              bg="green", fg="white",
+                              command=lambda name=dish_name: increase_quantity(name), 
+                              width=3)
+        plus_button.pack(side="left", padx=5)
 
-        item_frames[dish_name] = item_frame  # Store reference to remove later
+        # Store the widgets for potential removal
+        item_frames[dish_name] = {
+            'minus': minus_button,
+            'plus': plus_button,
+            'quantity': quantity_label,
+            'frame': control_frame
+        }
 
         y_position += 60  # Move down for the next item
 else:

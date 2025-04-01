@@ -11,6 +11,7 @@ import subprocess
 root = tk.Tk()
 root.title("Feasto")
 root.state('zoomed')
+root.configure(bg="black")  # Set full background to black
 
 # Near the top of the file
 table_number = sys.argv[2] if len(sys.argv) > 2 else "N/A"
@@ -62,49 +63,13 @@ else:
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 
-# Load and set background image
-bg_image = Image.open("images/restobg3.png").resize((screen_width, screen_height), Image.LANCZOS)
-bg_photo = ImageTk.PhotoImage(bg_image)
-
-# Create background label
-bg_label = tk.Label(root, image=bg_photo)
-bg_label.place(relwidth=1, relheight=1)
-
-# Title Label (Transparent Background)
-canvas = tk.Canvas(root, width=screen_width, height=screen_height)
-canvas.pack(fill="both", expand=True)
-canvas.create_image(0, 0, image=bg_photo, anchor="nw")
-canvas.create_text(screen_width/2, 75, text=f"{restaurant_name} Menu", font=("Arial", 28, "bold"), fill="white")
-
-# After canvas creation and before scroll frame setup
-# Add user profile button
-user_icon_size = 150
-user_icon_x = user_icon_size // 2 + 20
-user_icon_y = user_icon_size // 2 + 20
-
-# Load and resize the user icon image
-try:
-    user_icon = Image.open("images/user.jpg").resize((user_icon_size, user_icon_size))
-    user_photo = ImageTk.PhotoImage(user_icon)
-except:
-    print("User icon image not found, creating placeholder")
-    user_icon = Image.new("RGB", (user_icon_size, user_icon_size), "gray")
-    user_photo = ImageTk.PhotoImage(user_icon)
-
-# Create label for the user icon
-user_label = tk.Label(root, image=user_photo, cursor="hand2", bg="black")
-user_label.image = user_photo
-user_label.place(x=20, y=20)
-
-def open_user():
-    root.destroy()
-    subprocess.Popen(["python", "user.py", "menu", table_number])
-
-user_label.bind("<Button-1>", lambda event: open_user())
+# Title Label
+title_label = tk.Label(root, text=f"{restaurant_name} Menu", font=("Arial", 28, "bold"), fg="white", bg="black")
+title_label.pack(pady=20)
 
 # Scrollable Menu Frame
 scroll_canvas = tk.Canvas(root, width=screen_width, height=screen_height - 200, highlightthickness=0, bg="black")
-scroll_canvas.place(relx=0.01, rely=0.15, relwidth=0.96, relheight=0.75)
+scroll_canvas.place(relx=0.07, rely=0.15, relwidth=0.96, relheight=0.75)
 
 # Scrollbar
 scrollbar = tk.Scrollbar(root, orient="vertical", command=scroll_canvas.yview)
@@ -113,7 +78,7 @@ scroll_canvas.configure(yscrollcommand=scrollbar.set)
 
 # Scroll Frame
 scroll_frame = tk.Frame(scroll_canvas, bg="black") 
-scroll_window = scroll_canvas.create_window((0, 0), window=scroll_frame, anchor="nw", width=screen_width - 40)
+scroll_window = scroll_canvas.create_window((0, 0), window=scroll_frame, anchor="n", width=screen_width - 300)
 
 # Store images to prevent garbage collection
 image_refs = []
@@ -125,7 +90,7 @@ for item in menu_items:
     text = f" {dish_name} - ₹{price}\n {wrapped_description}"
 
     # Menu Item Frame
-    item_frame = tk.Frame(scroll_frame, bg="black", padx=10, pady=10)
+    item_frame = tk.Frame(scroll_frame, bg="black", padx=10, pady=10, highlightbackground="gray", highlightthickness=1)
     item_frame.pack(fill="x", padx=20, pady=10)
 
     # Load and place image
@@ -149,7 +114,7 @@ for item in menu_items:
     text_label = tk.Label(item_frame, text=text, font=("Arial", 16), fg="white", bg="black", anchor="w", justify="left")
     text_label.pack(side="left", padx=10, expand=True, fill="both")
 
-    # Add to Cart Button (Stylized)
+    # Add to Cart Button
     add_button = tk.Button(item_frame, text="Add to Cart", font=("Arial", 10, "bold"), bg="orange", fg="black", padx=12, pady=8, relief="ridge", borderwidth=2)
     add_button.config(command=lambda oid=order_id, name=dish_name, pr=price, btn=add_button: add_to_cart(oid, name, pr, restaurant_name, btn))
     add_button.pack(side="right", padx=10)
@@ -162,9 +127,9 @@ for item in menu_items:
 scroll_frame.update_idletasks()
 scroll_canvas.config(scrollregion=scroll_canvas.bbox("all"))
 
-# Bottom Buttons Frame (Side by Side)
+# Bottom Buttons Frame
 bottom_frame = tk.Frame(root, bg="black")
-bottom_frame.place(relx=0.5, rely=0.92, anchor="center")
+bottom_frame.place(relx=0.5, rely=0.96, anchor="center")
 
 # Checkout Button
 checkout_button = tk.Button(bottom_frame, text="Checkout 🛒", font=("Arial", 14, "bold"), command=open_checkout, bg="#ff5f5f", fg="white", padx=20, pady=10, relief="ridge", borderwidth=2, width=15)
@@ -179,4 +144,4 @@ exit_button.bind("<Enter>", on_enter_exit)
 exit_button.bind("<Leave>", on_leave_exit)
 
 # Run the Tkinter loop
-root.mainloop() 
+root.mainloop()
