@@ -50,24 +50,30 @@ user_icon_y = user_icon_size // 2 + 20
 
 # Load and resize the user icon image
 try:
-    user_icon = Image.open("images/user.jpg").resize((user_icon_size, user_icon_size))
+    user_icon = Image.open("images/user.png").resize((user_icon_size, user_icon_size))
     user_photo = ImageTk.PhotoImage(user_icon)
 except:
     print("User icon image not found, creating placeholder")
     user_icon = Image.new("RGB", (user_icon_size, user_icon_size), "gray")
     user_photo = ImageTk.PhotoImage(user_icon)
 
-# Create label for the user icon
-user_label = tk.Label(root, image=user_photo, cursor="hand2", bg="black")
-user_label.image = user_photo
-user_label.place(x=20, y=20)
+# Create a canvas for the user icon
+user_canvas = tk.Canvas(root, width=user_icon_size, height=user_icon_size, 
+                       bg="black", highlightthickness=0)
+user_canvas.place(x=20, y=20)
+
+# Add the image to the canvas
+user_canvas.create_image(user_icon_size//2, user_icon_size//2, 
+                        image=user_photo, anchor="center")
+user_canvas.config(cursor="hand2")
 
 def open_user():
     root.destroy()
     import subprocess
     subprocess.Popen(["python", "user.py", "checkout", table_number])
 
-user_label.bind("<Button-1>", lambda event: open_user())
+# Make the canvas clickable
+user_canvas.bind("<Button-1>", lambda event: open_user())
 
 # Display "Secure Checkout" title
 canvas.create_text(
