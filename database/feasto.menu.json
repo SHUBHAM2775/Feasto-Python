@@ -459,7 +459,7 @@
     "dish_name": "Ragda Pattice",
     "price": 259,
     "description": "Spicy potato patties topped with white peas curry and chutneys",
-    "image_path": "images/menu/kpRagdaPattice.jpeg"
+    "image_path": "images/menu/kpRagdaPattice.jpg"
   },
   {
     "_id": {
@@ -470,7 +470,7 @@
     "dish_name": "Chole Bhature",
     "price": 259,
     "description": "Fluffy deep-fried bread served with spicy chickpea curry",
-    "image_path": "images/menu/kpCholeBhature.jpeg"
+    "image_path": "images/menu/kpCholeBhature.jpg"
   },
   {
     "_id": {
@@ -514,7 +514,7 @@
     "dish_name": "Pav Bhaji",
     "price": 259,
     "description": "Spicy mashed vegetable curry served with buttered pav",
-    "image_path": "images/menu/kpPavBhaji.jpeg"
+    "image_path": "images/menu/kpPavBhaji.jpg"
   },
   {
     "_id": {
@@ -536,7 +536,7 @@
     "dish_name": "Bombay Sandwich",
     "price": 239,
     "description": "Grilled sandwich with veggies, chutney, and cheese",
-    "image_path": "images/menu/kpBombaySandwich.jpeg"
+    "image_path": "images/menu/kpBombaySandwich.jpg"
   },
   {
     "_id": {
@@ -547,7 +547,7 @@
     "dish_name": "Gulab Jamun",
     "price": 259,
     "description": "Soft, spongy sweet dumplings soaked in sugar syrup",
-    "image_path": "images/menu/kpGulabJamun.jpeg"
+    "image_path": "images/menu/kpGulabJamun.jpg"
   },
   {
     "_id": {
@@ -558,7 +558,7 @@
     "dish_name": "Kulhad Chai",
     "price": 99,
     "description": "Traditional masala chai served in a clay kulhad for an authentic taste",
-    "image_path": "images/menu/chaayosKulhadChai.jpeg"
+    "image_path": "images/menu/chaayosKulhadChai.png"
   },
   {
     "_id": {
@@ -569,7 +569,7 @@
     "dish_name": "Desi Chai",
     "price": 79,
     "description": "Classic Indian chai brewed with aromatic spices",
-    "image_path": "images/menu/chaayosDesiChai.jpeg"
+    "image_path": "images/menu/chaayosDesiChai.jpg"
   },
   {
     "_id": {
@@ -580,7 +580,7 @@
     "dish_name": "Bun Maska",
     "price": 59,
     "description": "Soft bun layered with butter and served with chai",
-    "image_path": "images/menu/chaayosBunMaska.jpeg"
+    "image_path": "images/menu/chaayosBunMaska.jpg"
   },
   {
     "_id": {
@@ -591,7 +591,7 @@
     "dish_name": "Paneer Makhani Wrap",
     "price": 179,
     "description": "Delicious wrap filled with paneer and creamy makhani sauce",
-    "image_path": "images/menu/chaayosPaneerMakhaniWrap.jpeg"
+    "image_path": "images/menu/chaayosPaneerMakhaniWrap.jpg"
   },
   {
     "_id": {
@@ -602,7 +602,7 @@
     "dish_name": "Chicken Keema Pav",
     "price": 199,
     "description": "Spicy minced chicken served with soft pav buns",
-    "image_path": "images/menu/chaayosChickenKeemaPav.jpeg"
+    "image_path": "images/menu/chaayosChickenKeemaPav.jpg"
   },
   {
     "_id": {
@@ -668,7 +668,7 @@
     "dish_name": "Steamed Veg Momos",
     "price": 99,
     "description": "Soft and juicy dumplings filled with fresh vegetables",
-    "image_path": "images/menu/wowSteamedVegMomos.jpeg"
+    "image_path": "images/menu/wowVegSteamedMomo.jpeg"
   },
   {
     "_id": {
@@ -679,7 +679,7 @@
     "dish_name": "Steamed Chicken Momos",
     "price": 129,
     "description": "Classic chicken momos, steamed to perfection",
-    "image_path": "images/menu/wowSteamedChickenMomos.jpeg"
+    "image_path": "images/menu/wowSteamedChicken.jpg"
   },
   {
     "_id": {
@@ -690,7 +690,7 @@
     "dish_name": "Fried Paneer Momos",
     "price": 149,
     "description": "Crispy fried momos stuffed with paneer and spices",
-    "image_path": "images/menu/wowFriedPaneerMomos.jpeg"
+    "image_path": "images/menu/wowFriedPaneerMomo.jpeg"
   },
   {
     "_id": {
@@ -701,7 +701,7 @@
     "dish_name": "Tandoori Chicken Momos",
     "price": 159,
     "description": "Momos marinated in rich tandoori spices and grilled",
-    "image_path": "images/menu/wowTandooriChickenMomos.jpeg"
+    "image_path": "images/menu/wowTandooriChickenMomo.jpeg"
   },
   {
     "_id": {
@@ -712,7 +712,7 @@
     "dish_name": "Schezwan Momos",
     "price": 139,
     "description": "Spicy momos tossed in fiery Schezwan sauce",
-    "image_path": "images/menu/wowSchezwanMomos.jpeg"
+    "image_path": "images/menu/wowSchezwanMomo.jpeg"
   },
   {
     "_id": {
@@ -734,7 +734,7 @@
     "dish_name": "Chicken Cheese Momos",
     "price": 169,
     "description": "Melt-in-the-mouth chicken momos loaded with cheese",
-    "image_path": "images/menu/wowChickenCheeseMomos.jpeg"
+    "image_path": "images/menu/wowChickenCheese.jpeg"
   },
   {
     "_id": {
@@ -745,7 +745,7 @@
     "dish_name": "Corn & Cheese Momos",
     "price": 159,
     "description": "A creamy blend of sweet corn and cheese inside soft momos",
-    "image_path": "images/menu/wowCornCheeseMomos.jpeg"
+    "image_path": "images/menu/wowCornCheeseMomo.jpeg"
   },
   {
     "_id": {
@@ -756,7 +756,7 @@
     "dish_name": "Chocolate Momos",
     "price": 149,
     "description": "Sweet momos filled with gooey chocolate",
-    "image_path": "images/menu/wowChocolateMomos.jpeg"
+    "image_path": "images/menu/wowChocolateMomo.jpeg"
   },
   {
     "_id": {
@@ -767,7 +767,7 @@
     "dish_name": "Spicy Peri Peri Momos",
     "price": 169,
     "description": "Crispy momos tossed in bold and spicy peri peri seasoning",
-    "image_path": "images/menu/wowPeriPeriMomos.jpeg"
+    "image_path": "images/menu/wowSpicyPeriPeriMomo.jpeg"
   },
   {
     "_id": {
@@ -778,7 +778,7 @@
     "dish_name": "Tender Coconut Ice Cream",
     "price": 99,
     "description": "Smooth and creamy coconut-flavored ice cream",
-    "image_path": "images/menu/naturalsTenderCoconut.jpeg"
+    "image_path": "images/menu/naturalsTenderCoconut.jpg"
   },
   {
     "_id": {
@@ -789,7 +789,7 @@
     "dish_name": "Alphonso Mango Ice Cream",
     "price": 119,
     "description": "Seasonal favorite made with real Alphonso mangoes",
-    "image_path": "images/menu/naturalsMango.jpeg"
+    "image_path": "images/menu/naturalsMango.jpg"
   },
   {
     "_id": {
@@ -800,7 +800,7 @@
     "dish_name": "Sitaphal (Custard Apple) Ice Cream",
     "price": 109,
     "description": "Deliciously creamy ice cream infused with custard apple",
-    "image_path": "images/menu/naturalsSitaphal.jpeg"
+    "image_path": "images/menu/naturalsSitaphal.jpg"
   },
   {
     "_id": {
@@ -811,7 +811,7 @@
     "dish_name": "Chikoo Ice Cream",
     "price": 99,
     "description": "Mouthwatering ice cream made from fresh Chikoo fruit",
-    "image_path": "images/menu/naturalsChikoo.jpeg"
+    "image_path": "images/menu/naturalsChikoo.jpg"
   },
   {
     "_id": {
@@ -833,7 +833,7 @@
     "dish_name": "Kesar Pista Ice Cream",
     "price": 129,
     "description": "Rich saffron and pistachio-flavored premium ice cream",
-    "image_path": "images/menu/naturalsKesarPista.jpeg"
+    "image_path": "images/menu/naturalsKesarPista.jpg"
   },
   {
     "_id": {
@@ -844,7 +844,7 @@
     "dish_name": "Chocolate Ice Cream",
     "price": 99,
     "description": "Classic chocolate ice cream with rich cocoa flavor",
-    "image_path": "images/menu/naturalsChocolate.jpeg"
+    "image_path": "images/menu/naturalsChocolate.jpg"
   },
   {
     "_id": {
@@ -855,7 +855,7 @@
     "dish_name": "Anjeer Ice Cream",
     "price": 139,
     "description": "Premium ice cream infused with figs (anjeer) and cream",
-    "image_path": "images/menu/naturalsAnjeer.jpeg"
+    "image_path": "images/menu/naturalsAnjeer.jpg"
   },
   {
     "_id": {
