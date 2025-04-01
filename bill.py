@@ -103,7 +103,7 @@ canvas.create_line(300, 300, 1250, 300, fill="white", width=2)
 # Calculate item_amount from cart collection
 cart_items = db.cart.find()
 item_amount = sum(item['quantity'] * item['price'] for item in cart_items)
-gst_amount = item_amount * 0.18  # Assuming 18% GST
+gst_amount = item_amount * 0.05  # Assuming 5% GST
 
 # Bill items section with tighter spacing
 canvas.create_text(500, 350, text=f"Item amount : ₹{item_amount:.2f}", font=("Arial", 20), fill="white", anchor="w")
