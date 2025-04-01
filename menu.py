@@ -90,7 +90,7 @@ for item in menu_items:
     text = f" {dish_name} - ₹{price}\n {wrapped_description}"
 
     # Menu Item Frame
-    item_frame = tk.Frame(scroll_frame, bg="black", padx=10, pady=10)
+    item_frame = tk.Frame(scroll_frame, bg="black", padx=10, pady=10, highlightbackground="gray", highlightthickness=1)
     item_frame.pack(fill="x", padx=20, pady=10)
 
     # Load and place image
