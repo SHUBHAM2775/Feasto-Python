@@ -77,7 +77,7 @@ user_canvas.bind("<Button-1>", lambda event: open_user())
 
 # Display "Secure Checkout" title
 canvas.create_text(
-    screen_width // 2, 100,
+    screen_width // 2, 80,
     text="Secure Checkout",
     font=("Georgia", 28, "bold"),
     fill="white"
@@ -85,14 +85,14 @@ canvas.create_text(
 
 # Display Restaurant Name
 canvas.create_text(
-    screen_width // 4, 175,  # Positioned below "Secure Checkout"
+    screen_width // 4, 155,
     text=f"{restaurant_name}",
     font=("Georgia", 24, "bold"),
-    fill="yellow"
+    fill="orange"
 )
 
 # **Display Cart Items**
-y_position = 250  # Start listing items below the restaurant name
+y_position = 230  # Start listing items below the restaurant name
 line_width = screen_width * 0.4
 start_x = (screen_width - line_width) // 2
 end_x = start_x + line_width
@@ -145,18 +145,36 @@ def decrease_quantity(dish_name):
     update_quantity_label(dish_name, new_quantity)
 
 if cart_items:
-    for dish_name, quantity in cart_items:
+    # Calculate number of items and split into two columns if needed
+    num_items = len(cart_items)
+    items_per_column = (num_items + 1) // 2  # Round up for odd number of items
+    
+    # Calculate column widths and starting positions
+    column_width = screen_width * 0.25
+    left_start_x = screen_width * 0.15
+    right_start_x = screen_width * 0.60
+    
+    # Display items in two columns
+    for index, (dish_name, quantity) in enumerate(cart_items):
+        # Determine which column this item belongs to
+        if index < items_per_column:
+            current_x = left_start_x
+            current_y = y_position + (index * 60)
+        else:
+            current_x = right_start_x
+            current_y = y_position + ((index - items_per_column) * 60)
+        
         # Create a semi-transparent black rectangle for the background
         rect_id = canvas.create_rectangle(
-            start_x, y_position,
-            start_x + screen_width * 0.25, y_position + 50,
+            current_x, current_y,
+            current_x + column_width, current_y + 50,
             fill="black",
-            stipple="gray50"  # This creates a semi-transparent effect
+            stipple="gray50"
         )
 
         # Dish name
         text_id = canvas.create_text(
-            start_x + 15, y_position + 25,
+            current_x + 15, current_y + 25,
             text=dish_name,
             font=("Arial", 16),
             fill="white",
@@ -168,7 +186,7 @@ if cart_items:
 
         # Create a frame for quantity controls
         control_frame = tk.Frame(root, bg="black")
-        control_frame.place(x=start_x + screen_width * 0.25, y=y_position + 10)
+        control_frame.place(x=current_x + column_width, y=current_y + 10)
 
         # "-" Button
         minus_button = tk.Button(control_frame, text="-", font=("Arial", 12, "bold"), 
@@ -198,8 +216,6 @@ if cart_items:
             'quantity': quantity_label,
             'frame': control_frame
         }
-
-        y_position += 60  # Move down for the next item
 else:
     canvas.create_text(
         screen_width // 2, y_position,

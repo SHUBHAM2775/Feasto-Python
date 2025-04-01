@@ -19,7 +19,7 @@
     "dish_name": "McSpicy Paneer",
     "price": 139,
     "description": "Flavourful Paneer layered with lettuce & spicy sauce",
-    "image_path": "images/menu/McSpicyPaneer.jpeg"
+    "image_path": "images/menu/mcSpicyPaneer.jpeg"
   },
   {
     "_id": {
@@ -52,7 +52,7 @@
     "dish_name": "McVeggie",
     "price": 129,
     "description": "Delicious Vegetable patty layered with lettuce & mayo",
-    "image_path": "images/menu/McVeggie.jpeg"
+    "image_path": "images/menu/mcVeggie.jpeg"
   },
   {
     "_id": {
@@ -74,7 +74,7 @@
     "dish_name": "McFlurry Oreo",
     "price": 179,
     "description": "Classic Vanilla ice cream with Oreo crumbles",
-    "image_path": "images/menu/McFlurryOreo.jpeg"
+    "image_path": "images/menu/mcFlurryOreo.jpeg"
   },
   {
     "_id": {
@@ -118,7 +118,7 @@
     "dish_name": "Classic Margarita",
     "price": 249,
     "description": "None required for this one right?",
-    "image_path": "images/menu/DominosMagarita.jpeg"
+    "image_path": "images/menu/dominosMagarita.jpeg"
   },
   {
     "_id": {
@@ -228,7 +228,7 @@
     "dish_name": "Whopper",
     "price": 169,
     "description": "Vegetable patty, cheese, lettuce & tomato",
-    "image_path": "images/menu/bkWhooper.jpeg"
+    "image_path": "images/menu/bkWhopper.jpeg"
   },
   {
     "_id": {
@@ -338,7 +338,7 @@
     "dish_name": "Caramel Macchiato",
     "price": 349,
     "description": "Espresso with steamed milk, vanilla syrup, and caramel drizzle",
-    "image_path": "images/menu/starCaffeLatte.jpeg"
+    "image_path": "images/menu/starCaramelMacchiato.jpeg"
   },
   {
     "_id": {
@@ -404,7 +404,7 @@
     "dish_name": "Strawberry Açaí Refresher",
     "price": 449,
     "description": "A refreshing blend of strawberry, açaí, and green coffee extract",
-    "image_path": "images/menu/starStarwberryAcaiRefresher.jpeg"
+    "image_path": "images/menu/starStrawberryAcaiRefresher.jpeg"
   },
   {
     "_id": {
@@ -438,7 +438,7 @@
     "price": 349,
     "description": "Soft and fluffy muffin packed with juicy blueberries",
     "image_path": "images/menu/starBlueberryMuffin.jpeg"
-  },  
+  },
   {
     "_id": {
       "$oid": "67e03ed4fe8721588e6bbc01"
@@ -548,7 +548,7 @@
     "price": 259,
     "description": "Soft, spongy sweet dumplings soaked in sugar syrup",
     "image_path": "images/menu/kpGulabJamun.jpeg"
-  },  
+  },
   {
     "_id": {
       "$oid": "67e03ed4fe8721588e6bbc11"
@@ -866,6 +866,6 @@
     "dish_name": "Malai Ice Cream",
     "price": 109,
     "description": "Traditional malai ice cream with a rich, creamy texture",
-    "image_path": "images/menu/naturalsMalai.jpeg"
+    "image_path": "images/menu/naturalsMalai.jpg"
   }
 ]

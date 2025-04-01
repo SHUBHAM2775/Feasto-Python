@@ -67,6 +67,17 @@ screen_height = root.winfo_screenheight()
 title_label = tk.Label(root, text=f"{restaurant_name} Menu", font=("Arial", 28, "bold"), fg="white", bg="black")
 title_label.pack(pady=20)
 
+# Add logo2.png in top right corner
+logo_size = 100
+try:
+    logo_image = Image.open("images/logo2.png").resize((logo_size, logo_size))
+    logo_photo = ImageTk.PhotoImage(logo_image)
+    logo_label = tk.Label(root, image=logo_photo, bg="black")
+    logo_label.image = logo_photo  # Keep a reference
+    logo_label.place(x=screen_width - logo_size - 30, y=10)
+except:
+    print("Logo image not found")
+
 # Scrollable Menu Frame
 scroll_canvas = tk.Canvas(root, width=screen_width, height=screen_height - 200, highlightthickness=0, bg="black")
 scroll_canvas.place(relx=0.07, rely=0.15, relwidth=0.96, relheight=0.75)
