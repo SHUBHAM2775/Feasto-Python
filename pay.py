@@ -25,9 +25,18 @@ def handle_payment(method):
     # Here you can add the logic for each payment method
     print(f"Processing {method} payment...")
     # Add your payment processing logic here
-    # After processing, you can open the confirmation screen
+    
+    # Read table number from current_user.txt
+    try:
+        with open("current_user.txt", "r") as f:
+            user_info = f.read().strip().split(',')
+            table_number = user_info[2]  # Table number is the third element
+    except:
+        table_number = "N/A"
+    
+    # After processing, open the order status screen with table number
     root.destroy()
-    # import confirmation  # You can import your confirmation screen here
+    subprocess.Popen(["python", "order_status.py", table_number])
 
 root = tk.Tk()
 root.title("Feasto: Payment Options")
