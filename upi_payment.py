@@ -26,17 +26,12 @@ def open_upi_payment_window():
     canvas.create_text(screen_width // 2, 80, text="Select UPI App",
                        font=("Arial", 35, "bold"), fill="white")
 
-    # Grey semi-transparent box
-    canvas.create_rectangle(250, 150, 1300, 600,
-                            fill="grey", stipple='gray50')
-
     # Load and resize UPI app logos
     def load_logo(path, size=(180, 180)):
         img = Image.open(path)
         img = img.resize(size, Image.LANCZOS)
         return ImageTk.PhotoImage(img)
 
-    # Corrected file paths
     gpay_img = load_logo("images/gpay.png")
     phonepe_img = load_logo("images/phonepe.png")
     paytm_img = load_logo("images/paytm.png")
@@ -74,21 +69,25 @@ def open_upi_payment_window():
         elif app_name == "Paytm":
             open_qr_window("images/paytmQR.png", app_name)
 
-    # Image buttons
+    # Coordinates for horizontal alignment
+    center_y = 300
+    spacing = 240
+    start_x = screen_width // 2 - spacing
+
     gpay_btn = tk.Button(win, image=gpay_img, bg="white", borderwidth=2,
                          command=lambda: select_upi_app("Google Pay"),
                          cursor="hand2")
-    gpay_btn.place(x=screen_width//2 - 250, y=250)
+    gpay_btn.place(x=start_x, y=center_y)
 
     phonepe_btn = tk.Button(win, image=phonepe_img, bg="white", borderwidth=2,
                             command=lambda: select_upi_app("PhonePe"),
                             cursor="hand2")
-    phonepe_btn.place(x=screen_width//2 - 80, y=250)
+    phonepe_btn.place(x=start_x + spacing, y=center_y)
 
     paytm_btn = tk.Button(win, image=paytm_img, bg="white", borderwidth=2,
                           command=lambda: select_upi_app("Paytm"),
                           cursor="hand2")
-    paytm_btn.place(x=screen_width//2 + 100, y=250)
+    paytm_btn.place(x=start_x + spacing * 2, y=center_y)
 
     # Back button
     def go_back_to_pay():
