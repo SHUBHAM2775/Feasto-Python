@@ -36,7 +36,7 @@ def open_upi_payment_window():
     phonepe_img = load_logo("images/phonepe.png")
     paytm_img = load_logo("images/paytm.png")
 
-    # Function to open QR window (fullscreen + destroy previous window)
+    # Function to open QR window and auto-redirect to order_status.py
     def open_qr_window(image_path, app_name):
         win.destroy()
         qr_win = tk.Tk()
@@ -56,7 +56,17 @@ def open_upi_payment_window():
             tk.Label(qr_win, text=f"Scan using {app_name}", font=("Arial", 28, "bold"), bg="white").pack()
 
             qr_win.qr_photo = qr_photo  # Keep reference
+
+            # Redirect after 5 seconds
+            def go_to_order_status():
+                qr_win.destroy()
+                python = sys.executable
+                script_path = os.path.join(os.path.dirname(__file__), "order_status.py")
+                subprocess.Popen([python, script_path])
+
+            qr_win.after(5000, go_to_order_status)
             qr_win.mainloop()
+
         except Exception as e:
             messagebox.showerror("Error", f"Could not load QR image:\n{str(e)}")
 
@@ -96,7 +106,7 @@ def open_upi_payment_window():
         script_path = os.path.join(os.path.dirname(__file__), "pay.py")
         subprocess.Popen([python, script_path])
 
-    back_btn = tk.Button(win, 
+    back_btn = tk.Button(win,
                          text="← Back",
                          font=("Arial", 16),
                          bg="#ff4444",
