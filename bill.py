@@ -2,11 +2,15 @@ from tkinter import *
 import tkinter as tk
 from PIL import Image, ImageTk
 from dbconnect import db, get_latest_user  # Import the database connection and get_latest_user function
+from dbconnect import get_user_details
+
 import subprocess
 import sys
 
 # Get table number from command line arguments BEFORE using it
 table_number = sys.argv[1] if len(sys.argv) > 1 else "N/A"
+
+
 
 def payment_options():
     root.destroy()  # Close current window
@@ -122,10 +126,22 @@ total_amount = item_amount + gst_amount
 # Total amount
 canvas.create_text(500, 500, text=f"Total amount : ₹{total_amount:.2f}", font=("Arial", 22, "bold"), fill="white", anchor="w")
 
+# Fetch user's details (including Feasto Points)
+user_details = get_user_details()
+balance = user_details.get("feasto_points", 0) 
+
+# Display the Feasto points balance below the total amount
+canvas.create_text(500, 550, text=f"Feasto Points : ₹{balance:.2f}", font=("Arial", 20, "bold"), fill="white", anchor="w")
+
 # Pay button with adjusted position
+pay_FP = Button(root, text="Pay Using FP", font=("Arial", 24, "bold"), bg="#4CAF50", fg="white", 
+                   width=15, height=1, command=payment_options)
+pay_FP.place(x=600, y=625, anchor="center")
+
 pay_button = Button(root, text="Pay", font=("Arial", 24, "bold"), bg="#4CAF50", fg="white", 
-                   width=10, height=1, command=payment_options)
-pay_button.place(x=775, y=600, anchor="center")
+                   width=15, height=1, command=payment_options)
+pay_button.place(x=950, y=625, anchor="center")
+
 
 
 root.mainloop()
