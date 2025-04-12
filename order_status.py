@@ -98,7 +98,7 @@ canvas.create_text(
 )
 
 # Initialize countdown variables
-initial_time = 15  # minutes
+initial_time = 1  # minutes
 countdown_time = initial_time * 60  # convert to seconds
 countdown_label = canvas.create_text(
     screen_width // 2, screen_height * 0.55,
