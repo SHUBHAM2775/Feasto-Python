@@ -36,6 +36,8 @@ def handle_payment(method):
 
     if method == "UPI":
         subprocess.Popen(["python", "upi_payment.py"])
+    elif method == "Card":
+        subprocess.Popen(["python", "cardpayment.py"])
     else:
         subprocess.Popen(["python", "order_status.py", table_number])
 

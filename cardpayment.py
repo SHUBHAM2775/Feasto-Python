@@ -5,6 +5,7 @@ import subprocess
 import os
 import sys
 
+
 def open_card_payment_window():
     win = tk.Tk()
     win.title("Feasto: Card Payment")
@@ -41,9 +42,9 @@ def open_card_payment_window():
 
     for i, label_text in enumerate(labels):
         label = tk.Label(win, text=label_text, font=("Arial", 16), bg="grey")
-        label.place(x=450, y=200 + i*80)
+        label.place(x=450, y=200 + i * 80)
         entry = tk.Entry(win, font=("Arial", 16), width=30, show="*" if "CVV" in label_text else "")
-        entry.place(x=700, y=200 + i*80)
+        entry.place(x=700, y=200 + i * 80)
         entries.append(entry)
 
     # Submit button
@@ -84,7 +85,7 @@ def open_card_payment_window():
         script_path = os.path.join(os.path.dirname(__file__), "pay.py")
         subprocess.Popen([python, script_path])
 
-    back_btn = tk.Button(win, 
+    back_btn = tk.Button(win,
                          text="← Back",
                          font=("Arial", 16),
                          bg="#ff4444",
@@ -97,6 +98,7 @@ def open_card_payment_window():
     win.bg_photo = bg_photo
 
     win.mainloop()
+
 
 if __name__ == "__main__":
     open_card_payment_window()
