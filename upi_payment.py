@@ -36,14 +36,43 @@ def open_upi_payment_window():
         img = img.resize(size, Image.LANCZOS)
         return ImageTk.PhotoImage(img)
 
-    gpay_img = load_logo("gpay.webp")  # Updated filename
-    phonepe_img = load_logo("phonepe.png")
-    paytm_img = load_logo("paytm.png")
+    # Corrected file paths
+    gpay_img = load_logo("images/gpay.png")
+    phonepe_img = load_logo("images/phonepe.png")
+    paytm_img = load_logo("images/paytm.png")
+
+    # Function to open QR window (fullscreen + destroy previous window)
+    def open_qr_window(image_path, app_name):
+        win.destroy()
+        qr_win = tk.Tk()
+        qr_win.title(f"{app_name} - Scan to Pay")
+        qr_win.state('zoomed')
+        qr_win.configure(bg="white")
+
+        screen_width = qr_win.winfo_screenwidth()
+        screen_height = qr_win.winfo_screenheight()
+
+        try:
+            qr_img = Image.open(image_path)
+            qr_img = qr_img.resize((400, 400), Image.LANCZOS)
+            qr_photo = ImageTk.PhotoImage(qr_img)
+
+            tk.Label(qr_win, image=qr_photo, bg="white").pack(pady=50)
+            tk.Label(qr_win, text=f"Scan using {app_name}", font=("Arial", 28, "bold"), bg="white").pack()
+
+            qr_win.qr_photo = qr_photo  # Keep reference
+            qr_win.mainloop()
+        except Exception as e:
+            messagebox.showerror("Error", f"Could not load QR image:\n{str(e)}")
 
     # Selection handler
     def select_upi_app(app_name):
-        messagebox.showinfo("Selected", f"{app_name} selected for UPI Payment.")
-        win.destroy()
+        if app_name == "Google Pay":
+            open_qr_window("images/gpayScanner.png", app_name)
+        elif app_name == "PhonePe":
+            open_qr_window("images/phonepeQR.png", app_name)
+        elif app_name == "Paytm":
+            open_qr_window("images/paytmQR.png", app_name)
 
     # Image buttons
     gpay_btn = tk.Button(win, image=gpay_img, bg="white", borderwidth=2,

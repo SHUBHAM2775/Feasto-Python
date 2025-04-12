@@ -22,10 +22,8 @@ def create_payment_button(window, text, x, y):
                  activebackground="#f0f0f0")
 
 def handle_payment(method):
-    # Here you can add the logic for each payment method
     print(f"Processing {method} payment...")
-    # Add your payment processing logic here
-    
+
     # Read table number from current_user.txt
     try:
         with open("current_user.txt", "r") as f:
@@ -33,10 +31,13 @@ def handle_payment(method):
             table_number = user_info[2]  # Table number is the third element
     except:
         table_number = "N/A"
-    
-    # After processing, open the order status screen with table number
+
     root.destroy()
-    subprocess.Popen(["python", "order_status.py", table_number])
+
+    if method == "UPI":
+        subprocess.Popen(["python", "upi_payment.py"])
+    else:
+        subprocess.Popen(["python", "order_status.py", table_number])
 
 root = tk.Tk()
 root.title("Feasto: Payment Options")
@@ -102,6 +103,5 @@ card_btn.place(x=775, y=375, anchor="center")
 cash_btn = create_payment_button(root, "Cash Payment", 0, 0)
 cash_btn.configure(command=lambda: handle_payment("Cash"))
 cash_btn.place(x=775, y=500, anchor="center")
-
 
 root.mainloop()
