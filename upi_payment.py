@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk, ImageOps
 import subprocess
 import os
 import sys
@@ -27,7 +27,7 @@ def open_upi_payment_window():
                        font=("Arial", 35, "bold"), fill="white")
 
     # Load and resize UPI app logos
-    def load_logo(path, size=(180, 180)):
+    def load_logo(path, size=(200, 200)):
         img = Image.open(path)
         img = img.resize(size, Image.LANCZOS)
         return ImageTk.PhotoImage(img)
@@ -36,7 +36,7 @@ def open_upi_payment_window():
     phonepe_img = load_logo("images/phonepe.png")
     paytm_img = load_logo("images/paytm.png")
 
-    # Function to open QR window and auto-redirect to order_status.py
+    # Function to open QR window (fullscreen + destroy previous window)
     def open_qr_window(image_path, app_name):
         win.destroy()
         qr_win = tk.Tk()
@@ -49,24 +49,28 @@ def open_upi_payment_window():
 
         try:
             qr_img = Image.open(image_path)
-            qr_img = qr_img.resize((400, 400), Image.LANCZOS)
+            qr_img = ImageOps.fit(qr_img, (400, 400), method=Image.LANCZOS)
             qr_photo = ImageTk.PhotoImage(qr_img)
 
-            tk.Label(qr_win, image=qr_photo, bg="white").pack(pady=50)
-            tk.Label(qr_win, text=f"Scan using {app_name}", font=("Arial", 28, "bold"), bg="white").pack()
+            center_x = (screen_width - 400) // 2
+            center_y = (screen_height - 400) // 2
 
-            qr_win.qr_photo = qr_photo  # Keep reference
+            tk.Label(qr_win, image=qr_photo, bg="white").place(x=center_x, y=center_y)
+            tk.Label(qr_win, text=f"Scan using {app_name}", font=("Arial", 28, "bold"),
+                     bg="white").place(x=screen_width // 2, y=center_y + 420, anchor="n")
 
-            # Redirect after 5 seconds
-            def go_to_order_status():
+            qr_win.qr_photo = qr_photo  # Prevent garbage collection
+
+            # Auto-close after 5 seconds and open order_status.py
+            def open_order_status():
                 qr_win.destroy()
                 python = sys.executable
                 script_path = os.path.join(os.path.dirname(__file__), "order_status.py")
                 subprocess.Popen([python, script_path])
 
-            qr_win.after(5000, go_to_order_status)
-            qr_win.mainloop()
+            qr_win.after(5000, open_order_status)
 
+            qr_win.mainloop()
         except Exception as e:
             messagebox.showerror("Error", f"Could not load QR image:\n{str(e)}")
 
@@ -79,25 +83,26 @@ def open_upi_payment_window():
         elif app_name == "Paytm":
             open_qr_window("images/paytmQR.png", app_name)
 
-    # Coordinates for horizontal alignment
-    center_y = 300
-    spacing = 240
-    start_x = screen_width // 2 - spacing
+    # Position UPI logos in the center horizontally
+    logo_size = 200
+    spacing = 100
+    total_width = 3 * logo_size + 2 * spacing
+    start_x = (screen_width - total_width) // 2
+    y_position = screen_height // 2 - logo_size // 2
 
     gpay_btn = tk.Button(win, image=gpay_img, bg="white", borderwidth=2,
-                         command=lambda: select_upi_app("Google Pay"),
-                         cursor="hand2")
-    gpay_btn.place(x=start_x, y=center_y)
+                         command=lambda: select_upi_app("Google Pay"), cursor="hand2")
+    gpay_btn.place(x=start_x, y=y_position, width=logo_size, height=logo_size)
 
     phonepe_btn = tk.Button(win, image=phonepe_img, bg="white", borderwidth=2,
-                            command=lambda: select_upi_app("PhonePe"),
-                            cursor="hand2")
-    phonepe_btn.place(x=start_x + spacing, y=center_y)
+                            command=lambda: select_upi_app("PhonePe"), cursor="hand2")
+    phonepe_btn.place(x=start_x + logo_size + spacing, y=y_position,
+                      width=logo_size, height=logo_size)
 
     paytm_btn = tk.Button(win, image=paytm_img, bg="white", borderwidth=2,
-                          command=lambda: select_upi_app("Paytm"),
-                          cursor="hand2")
-    paytm_btn.place(x=start_x + spacing * 2, y=center_y)
+                          command=lambda: select_upi_app("Paytm"), cursor="hand2")
+    paytm_btn.place(x=start_x + 2 * (logo_size + spacing), y=y_position,
+                    width=logo_size, height=logo_size)
 
     # Back button
     def go_back_to_pay():
@@ -106,7 +111,7 @@ def open_upi_payment_window():
         script_path = os.path.join(os.path.dirname(__file__), "pay.py")
         subprocess.Popen([python, script_path])
 
-    back_btn = tk.Button(win,
+    back_btn = tk.Button(win, 
                          text="← Back",
                          font=("Arial", 16),
                          bg="#ff4444",
