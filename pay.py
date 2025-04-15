@@ -12,7 +12,7 @@ def create_payment_button(window, text, x, y):
     return Button(window, 
                  text=text,
                  font=("Arial", 22, "bold"),
-                 bg="white",
+                 bg="orange",
                  fg="#333333",
                  width=15,
                  height=2,
@@ -96,14 +96,14 @@ canvas.create_rectangle(250, 150, 1300, 600,
 # Payment method buttons with improved design
 upi_btn = create_payment_button(root, "UPI Payment", 0, 0)
 upi_btn.configure(command=lambda: handle_payment("UPI"))
-upi_btn.place(x=775, y=250, anchor="center")
+upi_btn.place(x=775, y=300, anchor="center")
 
 card_btn = create_payment_button(root, "Card Payment", 0, 0)
 card_btn.configure(command=lambda: handle_payment("Card"))
-card_btn.place(x=775, y=375, anchor="center")
-
+card_btn.place(x=775, y=420, anchor="center")
+'''
 cash_btn = create_payment_button(root, "Cash Payment", 0, 0)
 cash_btn.configure(command=lambda: handle_payment("Cash"))
 cash_btn.place(x=775, y=500, anchor="center")
-
+'''
 root.mainloop()
