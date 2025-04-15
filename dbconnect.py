@@ -17,7 +17,6 @@ def get_restaurants():
         image_path = r.get("image", "images/default.jpg")  # Use default if image is missing
         result[r["name"]] = {"image": image_path}
 
-    print("Fetched Restaurants:", result)  # Debugging line
     return result
 
 def get_menu_items(restaurant_name):
@@ -48,7 +47,6 @@ def insert_user_entry(name, mobile):
 
     # Insert into MongoDB collection
     db.users.insert_one(new_entry)
-    print("✅ New user entry inserted:", new_entry)
 
 def get_all_user_entries():
     """Return all stored user entries"""
@@ -66,7 +64,6 @@ def add_to_cart_db(order_id, restaurant_name, dish_name, price, quantity=1):
     }
 
     db.cart.insert_one(cart_item)
-    print(f"🛒 Cart item added: {cart_item}")
 
 def get_cart_items(restaurant_name):
     """Fetch items & quantities from the cart collection"""
@@ -113,12 +110,9 @@ def verify_user(name, mobile):
     })
     return user is not None
 
-def get_user_details():
-    """Fetch the most recent user's details from the database"""
-    user = db.users.find_one(
-        {},
-        sort=[("timestamp", -1)]  # Sort by timestamp descending
-    )
+def get_user_details_by_username(username):
+    """Fetch user details from the database based on username"""
+    user = db.users.find_one({"name": username})
     if user:
         return {
             "name": user.get("name", "N/A"),
@@ -126,7 +120,7 @@ def get_user_details():
             "table_number": user.get("table_number", "N/A"),
             "feasto_points": user.get("feasto_points", 0)
         }
-    return {"name": "N/A", "mobile": "N/A", "table_number": "N/A", "feasto_points": 0}
+    return {"name": "N/A", "mobile": "N/A", "table_number": "N/A", "feasto_points": 0}  
 
 def get_user_by_credentials(name, mobile):
     """Fetch specific user's details from the database using login credentials"""
@@ -142,3 +136,11 @@ def get_user_by_credentials(name, mobile):
             "feasto_points": user.get("feasto_points", 0)
         }
     return {"name": "N/A", "mobile": "N/A", "table_number": "N/A", "feasto_points": 0}
+
+# ✅ NEW FUNCTION: Deduct Feasto points from the user
+def deduct_feasto_points(username, points):
+    """Deduct specific number of Feasto points for a given user"""
+    db.users.update_one(
+        {"name": username},
+        {"$inc": {"feasto_points": -points}}
+    )
