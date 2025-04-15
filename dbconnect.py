@@ -144,3 +144,10 @@ def deduct_feasto_points(username, points):
         {"name": username},
         {"$inc": {"feasto_points": -points}}
     )
+
+def add_feasto_points(username, points):
+    """Add specific number of Feasto points to a given user"""
+    db.users.update_one(
+        {"name": username},  # Use "name" to identify the user
+        {"$inc": {"feasto_points": points}}  # Increment Feasto points
+    )

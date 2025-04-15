@@ -1,10 +1,22 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 import sys
-from dbconnect import db
+from dbconnect import db, get_user_details_by_username, deduct_feasto_points, add_feasto_points
 import subprocess
 import time
 from datetime import datetime, timedelta
+from tkinter import *
+import tkinter as tk
+from tkinter import messagebox, ttk
+from PIL import Image, ImageTk
+
+# Get table number from CLI arg (if any)
+table_number = sys.argv[1] if len(sys.argv) > 1 else "N/A"
+
+# Read username from file
+with open("current_user.txt", "r") as f:
+    user_line = f.readline().strip()
+    username = user_line.split(",")[0]  # Format: SU,1234567890,35
 
 # Get user information from current_user.txt
 try:
@@ -124,5 +136,32 @@ def update_countdown():
 
 # Start the countdown
 update_countdown()
+
+# Fetch cart items from the database
+cart_items = db.cart.find()
+item_amount = sum(item['quantity'] * item['price'] for item in cart_items)
+gst_amount = item_amount * 0.05
+total_amount = item_amount + gst_amount
+
+# Calculate Feasto Points based on Total Amount
+if total_amount < 200:
+    earned_points = 10
+elif total_amount < 500:
+    earned_points = 30
+elif total_amount < 1000:
+    earned_points = 60
+else:
+    earned_points = 100
+
+# Add Feasto Points to current user
+add_feasto_points(user_name, earned_points)
+
+# Display Earned Points
+canvas.create_text(
+    screen_width // 2, screen_height * 0.65,
+    text=f"You earned {earned_points} Feasto Points!",
+    font=("Arial", 22, "bold"),
+    fill="lightgreen"
+)
 
 root.mainloop()
