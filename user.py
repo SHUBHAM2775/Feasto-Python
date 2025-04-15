@@ -75,6 +75,6 @@ back_button = tk.Button(root, text="Back",
                        fg="black", 
                        command=go_back,
                        width=10)
-back_button.place(relx=0.5, rely=0.8, anchor="center")
+back_button.place(relx=0.5, rely=0.9, anchor="center")
 
 root.mainloop()
