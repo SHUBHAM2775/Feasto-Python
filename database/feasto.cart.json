@@ -1,0 +1,52 @@
+[{
+  "_id": {
+    "$oid": "680a4979784610f1d220422f"
+  },
+  "order_id": 31,
+  "restaurant_name": "Starbucks",
+  "dish_name": "Caramel Macchiato",
+  "price": 349,
+  "quantity": 4,
+  "timestamp": {
+    "$date": "2025-04-24T14:23:53.396Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "680a4979784610f1d2204230"
+  },
+  "order_id": 32,
+  "restaurant_name": "Starbucks",
+  "dish_name": "Caffè Latte",
+  "price": 399,
+  "quantity": 5,
+  "timestamp": {
+    "$date": "2025-04-24T14:23:53.812Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "680a497a784610f1d2204231"
+  },
+  "order_id": 33,
+  "restaurant_name": "Starbucks",
+  "dish_name": "Mocha Frappuccino",
+  "price": 549,
+  "quantity": 2,
+  "timestamp": {
+    "$date": "2025-04-24T14:23:54.414Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "680a497b784610f1d2204232"
+  },
+  "order_id": 34,
+  "restaurant_name": "Starbucks",
+  "dish_name": "Pumpkin Spice Latte",
+  "price": 569,
+  "quantity": 2,
+  "timestamp": {
+    "$date": "2025-04-24T14:23:55.069Z"
+  }
+}]
