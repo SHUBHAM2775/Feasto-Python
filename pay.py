@@ -66,7 +66,7 @@ user_icon_y = user_icon_size // 2 + 20
 
 # Load and resize the user icon image
 try:
-    user_icon = Image.open("images/user.jpg").resize((user_icon_size, user_icon_size))
+    user_icon = Image.open("images/user.png").resize((user_icon_size, user_icon_size))
     user_photo = ImageTk.PhotoImage(user_icon)
 except:
     print("User icon image not found, creating placeholder")

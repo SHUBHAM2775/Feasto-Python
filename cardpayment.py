@@ -49,17 +49,37 @@ def open_card_payment_window():
 
     # Submit button
     def submit_card_details():
-        card_number = entries[0].get()
-        card_holder = entries[1].get()
-        expiry_date = entries[2].get()
-        cvv = entries[3].get()
+        card_number = entries[0].get().strip()
+        card_holder = entries[1].get().strip()
+        expiry_date = entries[2].get().strip()
+        cvv = entries[3].get().strip()
 
-        if not all([card_number, card_holder, expiry_date, cvv]):
-            messagebox.showwarning("Input Error", "Please fill in all fields.")
+        # Validate card number (16 digits, numeric only)
+        if not (card_number.isdigit() and len(card_number) == 16):
+            messagebox.showwarning("Input Error", "Card Number must be 16 digits.")
             return
 
-        # Here, you would add your card processing logic
-        # For demonstration, we'll just show a success message
+        # Validate card holder name (alphabetic only)
+        if not card_holder.replace(" ", "").isalpha():
+            messagebox.showwarning("Input Error", "Card Holder Name must contain only letters.")
+            return
+
+        # Validate expiry date (MM/YY format)
+        if not (len(expiry_date) == 5 and expiry_date[2] == '/' and expiry_date[:2].isdigit() and expiry_date[3:].isdigit()):
+            messagebox.showwarning("Input Error", "Expiry Date must be in MM/YY format.")
+            return
+
+        month, year = expiry_date.split('/')
+        if not (1 <= int(month) <= 12):
+            messagebox.showwarning("Input Error", "Invalid month in Expiry Date.")
+            return
+
+        # Validate CVV (3 digits, numeric only)
+        if not (cvv.isdigit() and len(cvv) == 3):
+            messagebox.showwarning("Input Error", "CVV must be 3 digits.")
+            return
+
+        # If all validations pass
         messagebox.showinfo("Payment Successful", "Your card has been charged successfully.")
         win.destroy()
 
