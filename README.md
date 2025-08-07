@@ -89,10 +89,10 @@ A comprehensive Python desktop application for restaurant food ordering with int
 ## � Team
 
 
-**[Team Member Name]**  
+**Nitya Singh**  
 GitHub: [@S-Nitya](https://github.com/S-Nitya)
 
-**[Team Member Name]**  
+**Siddhi Sushir**  
 GitHub: [@siddhi-ms](https://github.com/siddhi-ms)
 
 **Shubham Upadhyay**  
