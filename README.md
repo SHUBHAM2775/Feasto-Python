@@ -95,7 +95,7 @@ GitHub: [@S-Nitya](https://github.com/S-Nitya)
 **Siddhi Sushir**  
 GitHub: [@siddhi-ms](https://github.com/siddhi-ms)
 
-**Shubham Upadhyay**
+**Shubham Upadhyay**  
 GitHub: [@SHUBHAM2775](https://github.com/SHUBHAM2775)
 ---
 *A collaborative college project showcasing Python GUI development, database integration, and payment system implementation.*
